@@ -165,7 +165,6 @@ export class CalendarUtilsService {
   generateMonthDays(monthStart: DateTime): DateTime[] {
     const days: DateTime[] = [];
     const startOfMonth = monthStart.startOf('month');
-    const endOfMonth = monthStart.endOf('month');
 
     // Start from the beginning of the week containing the first day of the month
     const startDate = startOfMonth.startOf('week');

@@ -238,7 +238,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   // Calculate event position within a time slot with proper stacking
-  getEventPositionInSlot(event: CalendarEvent, slotTime: DateTime, stackIndex = 0): { top: number, height: number } {
+  getEventPositionInSlot(event: CalendarEvent, slotTime: DateTime): { top: number, height: number } {
     const slotDuration = this.config().timeSlotDuration || 30;
     const eventTime = event.time || event.date;
     const duration = event.duration || 60;
@@ -256,7 +256,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   // Get events with proper stacking for overlapping (improved algorithm)
-  getStackedEventsForSlot(events: CalendarEvent[], slotTime: DateTime): {event: CalendarEvent, stackIndex: number, left: number, width: number}[] {
+  getStackedEventsForSlot(events: CalendarEvent[]): {event: CalendarEvent, left: number, width: number}[] {
     if (events.length <= 1) {
       return events.map(e => ({ 
         event: e, 
