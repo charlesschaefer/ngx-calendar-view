@@ -25,12 +25,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/ngx-calendar-view.git"
+    "url": "https://github.com/charlesschaefer/ngx-calendar-view.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/ngx-calendar-view/issues"
+    "url": "https://github.com/charlesschaefer/ngx-calendar-view/issues"
   },
-  "homepage": "https://github.com/yourusername/ngx-calendar-view#readme",
+  "homepage": "https://github.com/charlesschaefer/ngx-calendar-view#readme",
   "peerDependencies": {
     "@angular/common": "^20.0.0",
     "@angular/core": "^20.0.0",
