@@ -1,0 +1,24 @@
+{
+  "name": "ngx-calendar-view",
+  "version": "0.0.0",
+  "description": "A responsive Angular calendar component library with day/week/month views, drag-and-drop events, and mobile swipe support",
+  "keywords": ["angular", "calendar", "component", "library", "typescript", "responsive", "mobile"],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/ngx-calendar-view.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/ngx-calendar-view/issues"
+  },
+  "homepage": "https://github.com/yourusername/ngx-calendar-view#readme",
+  "peerDependencies": {
+    "@angular/common": "^20.0.0",
+    "@angular/core": "^20.0.0",
+    "luxon": "^3.0.0"
+  },
+  "ngPackage": {
+    "allowedNonPeerDependencies": ["luxon"]
+  }
+}

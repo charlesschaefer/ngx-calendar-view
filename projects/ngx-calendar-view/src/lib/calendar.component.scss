@@ -1,0 +1,162 @@
+.calendar-container {
+  --calendar-primary: #2563eb;
+  --calendar-secondary: #64748b;
+  --calendar-background: #ffffff;
+  --calendar-surface: #f8fafc;
+  --calendar-border: #e2e8f0;
+  --calendar-text: #1e293b;
+  --calendar-text-secondary: #64748b;
+}
+
+.view-type-button {
+  @apply px-3 py-1 text-sm rounded-md transition-colors;
+}
+
+.view-type-button.active {
+  @apply bg-calendar-primary text-white;
+}
+
+.view-type-button.inactive {
+  @apply bg-calendar-surface text-calendar-text hover:bg-calendar-border;
+}
+
+// Event card styles with proper positioning
+.event-card {
+  transition: all 0.2s ease-in-out;
+  position: absolute;
+  z-index: 10;
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 20; // Bring to front on hover
+  }
+}
+
+// Time slot styles for better event positioning
+.time-slot {
+  min-height: 2rem;
+  position: relative;
+  overflow: visible; // Allow events to extend beyond slot boundaries
+}
+
+// Ensure time slots container allows overflow
+.time-slots {
+  position: relative;
+  overflow: visible;
+}
+
+// Calendar views container
+.calendar-day-view,
+.calendar-week-view {
+  overflow: visible;
+}
+
+// Day column in week view
+.day-column {
+  overflow: visible;
+}
+
+// All-day events styles
+.all-day-events-section {
+  margin-bottom: 1rem;
+}
+
+.all-day-header {
+  font-weight: 500;
+}
+
+.all-day-events-container {
+  min-height: 2rem;
+}
+
+.all-day-event-card {
+  transition: all 0.2s ease-in-out;
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.all-day-row {
+  min-height: 2rem;
+}
+
+.all-day-events-day {
+  min-height: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  
+  .all-day-event-card {
+    margin-bottom: 0.25rem;
+    flex-shrink: 0; // Prevent shrinking
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  // Empty state styling
+  > div:not(.all-day-event-card) {
+    display: flex;
+    align-items: center;
+    min-height: 1.5rem;
+  }
+}
+
+// Month day styles for event display
+.month-day {
+  min-height: 6rem;
+  
+  .event-card {
+    margin-bottom: 0.125rem; // space-y-0.5 equivalent
+    position: relative; // Override absolute positioning for month view
+    display: block;
+    width: 100%;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// Event popover styles
+.event-popover {
+  animation: fadeIn 0.2s ease-in-out;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  
+  // Arrow pointing to the event
+  &::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 8px solid transparent;
+    border-top-color: white;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 9px solid transparent;
+    border-top-color: #e5e7eb;
+    margin-top: -1px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

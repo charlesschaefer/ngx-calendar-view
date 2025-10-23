@@ -86,6 +86,32 @@
           }
         }
       }
+    },
+    "ngx-calendar-view": {
+      "projectType": "library",
+      "root": "projects/ngx-calendar-view",
+      "sourceRoot": "projects/ngx-calendar-view/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-calendar-view/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-calendar-view/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/ngx-calendar-view/tsconfig.spec.json"
+          }
+        }
+      }
     }
   }
 }
