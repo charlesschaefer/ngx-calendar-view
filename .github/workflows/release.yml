@@ -32,6 +32,26 @@ jobs:
       - name: Run tests
         run: npm test -- --watch=false --browsers=ChromeHeadless
       
+      - name: Pack library
+        run: |
+          cd projects/ngx-calendar-view
+          npm pack
+          mv ngx-calendar-view-*.tgz ../../dist/ngx-calendar-view/
+      
+      - name: Create source zip
+        run: |
+          cd dist/ngx-calendar-view
+          zip -r ngx-calendar-view-source-${{ steps.version.outputs.version }}.zip . -x "*.tgz"
+      
+      - name: Verify files exist
+        run: |
+          echo "Checking for generated files..."
+          ls -la dist/ngx-calendar-view/
+          echo "Looking for .tgz file:"
+          ls -la dist/ngx-calendar-view/*.tgz || echo "No .tgz file found"
+          echo "Looking for .zip file:"
+          ls -la dist/ngx-calendar-view/*.zip || echo "No .zip file found"
+      
       - name: Extract version from package.json
         id: version
         run: |
@@ -40,6 +60,7 @@ jobs:
           echo "tag=v$VERSION" >> $GITHUB_OUTPUT
       
       - name: Create release
+        id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -62,7 +83,7 @@ jobs:
             
             The following files are included in this release:
             - `ngx-calendar-view-${{ steps.version.outputs.version }}.tgz` - NPM package
-            - Source code and documentation
+            - `ngx-calendar-view-source-${{ steps.version.outputs.version }}.zip` - Source code and documentation
           draft: false
           prerelease: false
       
@@ -82,6 +103,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/ngx-calendar-view/
+          asset_path: ./dist/ngx-calendar-view/ngx-calendar-view-source-${{ steps.version.outputs.version }}.zip
           asset_name: ngx-calendar-view-source-${{ steps.version.outputs.version }}.zip
           asset_content_type: application/zip
