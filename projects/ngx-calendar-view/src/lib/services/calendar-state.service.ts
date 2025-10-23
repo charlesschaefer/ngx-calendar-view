@@ -1,5 +1,6 @@
 import { Injectable, signal, computed } from '@angular/core';
 import { DateTime } from 'luxon';
+
 import { CalendarEvent, CalendarProject, CalendarConfig, CalendarViewType } from '../models';
 
 @Injectable({

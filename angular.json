@@ -84,6 +84,16 @@
               "src/styles.scss"
             ]
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ],
+            "fix": true
+          }
         }
       }
     },
@@ -109,6 +119,16 @@
           "builder": "@angular/build:karma",
           "options": {
             "tsConfig": "projects/ngx-calendar-view/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngx-calendar-view/src/**/*.ts",
+              "projects/ngx-calendar-view/src/**/*.html"
+            ],
+            "fix": true
           }
         }
       }

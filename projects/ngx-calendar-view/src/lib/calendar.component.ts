@@ -1,10 +1,12 @@
 import { Component, input, output, OnInit, OnDestroy, ChangeDetectionStrategy, inject, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DateTime } from 'luxon';
+
 import { CalendarEvent, CalendarProject, CalendarConfig, CalendarViewType } from './models';
 import { CalendarStateService, CalendarUtilsService, ColorGeneratorService } from './services';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'ngx-calendar',
   imports: [CommonModule],
   standalone: true,
@@ -173,7 +175,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   // Handle event stacking and "view more" functionality
-  getVisibleEvents(events: CalendarEvent[], maxVisible: number = 3): { visible: CalendarEvent[], hidden: number } {
+  getVisibleEvents(events: CalendarEvent[], maxVisible = 3): { visible: CalendarEvent[], hidden: number } {
     if (events.length <= maxVisible) {
       return { visible: events, hidden: 0 };
     }
@@ -181,22 +183,22 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   // Determine if description should be shown based on event duration
-  shouldShowDescription(event: CalendarEvent, slotDuration: number = 30): boolean {
+  shouldShowDescription(event: CalendarEvent, slotDuration = 30): boolean {
     const duration = event.duration || 60; // default 1 hour
     const minDurationForDescription = slotDuration * 2; // Show description if event is at least 2 slots long
     return duration >= minDurationForDescription;
   }
 
   // Get minimum height needed for description
-  getMinHeightForDescription(slotDuration: number = 30): number {
+  getMinHeightForDescription(slotDuration = 30): number {
     return (slotDuration * 2 / slotDuration) * 2; // 2 slots worth of height in rem
   }
 
   // Popover management
-  showPopover(event: CalendarEvent, mouseEvent?: MouseEvent): void {
+  showPopover(event: CalendarEvent, mouseEvent?: MouseEvent | KeyboardEvent): void {
     this.popoverEvent.set(event);
     if (mouseEvent) {
-      this.popoverPosition.set({ x: mouseEvent.clientX, y: mouseEvent.clientY });
+      this.popoverPosition.set({ x: (mouseEvent as MouseEvent).clientX, y: (mouseEvent as MouseEvent).clientY });
     }
   }
 
@@ -221,7 +223,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   // Calculate event position for day/week views
-  calculateEventPosition(event: CalendarEvent, slotDuration: number = 30): { top: number, height: number } {
+  calculateEventPosition(event: CalendarEvent, slotDuration = 30): { top: number, height: number } {
     const eventTime = event.time || event.date;
     const duration = event.duration || 60; // default 1 hour
     
@@ -236,7 +238,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   // Calculate event position within a time slot with proper stacking
-  getEventPositionInSlot(event: CalendarEvent, slotTime: DateTime, stackIndex: number = 0): { top: number, height: number } {
+  getEventPositionInSlot(event: CalendarEvent, slotTime: DateTime, stackIndex = 0): { top: number, height: number } {
     const slotDuration = this.config().timeSlotDuration || 30;
     const eventTime = event.time || event.date;
     const duration = event.duration || 60;
@@ -254,7 +256,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   // Get events with proper stacking for overlapping (improved algorithm)
-  getStackedEventsForSlot(events: CalendarEvent[], slotTime: DateTime): Array<{event: CalendarEvent, stackIndex: number, left: number, width: number}> {
+  getStackedEventsForSlot(events: CalendarEvent[], slotTime: DateTime): {event: CalendarEvent, stackIndex: number, left: number, width: number}[] {
     if (events.length <= 1) {
       return events.map(e => ({ 
         event: e, 
@@ -277,8 +279,8 @@ export class CalendarComponent implements OnInit, OnDestroy {
       let placed = false;
       
       // Try to place in existing stack
-      for (let i = 0; i < stacks.length; i++) {
-        const stack = stacks[i];
+      //for (let i = 0; i < stacks.length; i++) {
+      for (const stack of stacks) {
         let canPlaceInStack = true;
         
         // Check if this event overlaps with any event in this stack
@@ -302,7 +304,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
       }
     }
     
-    const result: Array<{event: CalendarEvent, stackIndex: number, left: number, width: number}> = [];
+    const result: {event: CalendarEvent, stackIndex: number, left: number, width: number}[] = [];
     const availableWidth = 100 - 3.5; // Total width minus time label space and margins
     const stackWidth = availableWidth / stacks.length; // Available width divided by number of stacks
     

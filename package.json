@@ -14,10 +14,9 @@
     "ng": "ng",
     "start": "ng serve ngx-calendar-view-demo",
     "build": "ng build ngx-calendar-view",
-    "build:demo": "ng build ngx-calendar-view-demo",
     "watch": "ng build ngx-calendar-view --watch --configuration development",
-    "test": "ng test ngx-calendar-view",
-    "test:demo": "ng test ngx-calendar-view-demo",
+    "test": "ng test",
+    "lint": "ng lint",
     "bump-version": "npm version patch --no-git-tag-version --workspaces=true --include-workspace-root"
   },
   "private": false,
@@ -59,7 +58,12 @@
     "@types/hammerjs": "^2.0.46",
     "@types/jasmine": "~5.1.0",
     "@types/luxon": "^3.7.1",
+    "angular-eslint": "20.4.0",
     "autoprefixer": "^10.4.21",
+    "eslint": "^9.37.0",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-unused-imports": "^4.3.0",
     "hammerjs": "^2.0.8",
     "jasmine-core": "~5.7.0",
     "karma": "~6.4.0",
@@ -71,7 +75,8 @@
     "ng-packagr": "^20.3.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.18",
-    "typescript": "~5.8.2"
+    "typescript": "~5.8.2",
+    "typescript-eslint": "8.46.0"
   },
   "workspaces": [
     "projects/ngx-calendar-view"

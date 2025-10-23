@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DateTime } from 'luxon';
+
 import { CalendarEvent, CalendarViewType, WorkingHours } from '../models';
 
 export interface TimeSlot {
@@ -20,7 +21,7 @@ export interface EventPosition {
 })
 export class CalendarUtilsService {
 
-  generateTimeSlots(slotDuration: number = 30, workingHours?: WorkingHours): TimeSlot[] {
+  generateTimeSlots(slotDuration = 30, workingHours?: WorkingHours): TimeSlot[] {
     const slots: TimeSlot[] = [];
     
     // Default to 24-hour view if no working hours specified
@@ -74,7 +75,7 @@ export class CalendarUtilsService {
     });
   }
 
-  calculateEventPosition(event: CalendarEvent, slotDuration: number = 30): EventPosition {
+  calculateEventPosition(event: CalendarEvent, slotDuration = 30): EventPosition {
     const eventTime = event.time || event.date;
     const duration = event.duration || 60; // default 1 hour
 
@@ -95,7 +96,7 @@ export class CalendarUtilsService {
     };
   }
 
-  calculateOverlappingEvents(events: CalendarEvent[], slotDuration: number = 30): Map<string, EventPosition[]> {
+  calculateOverlappingEvents(events: CalendarEvent[], slotDuration = 30): Map<string, EventPosition[]> {
     const eventPositions = new Map<string, EventPosition[]>();
 
     // Sort events by start time
@@ -111,8 +112,7 @@ export class CalendarUtilsService {
       let placed = false;
 
       // Try to place in existing column
-      for (let i = 0; i < columns.length; i++) {
-        const column = columns[i];
+      for (const column of columns) {
         const lastEvent = column[column.length - 1];
 
         if (this.canPlaceEvent(event, lastEvent)) {
@@ -183,9 +183,7 @@ export class CalendarUtilsService {
       case CalendarViewType.DAY:
         return date.toFormat('EEEE, MMMM d, yyyy');
       case CalendarViewType.WEEK:
-        const weekStart = date.startOf('week');
-        const weekEnd = date.endOf('week');
-        return `${weekStart.toFormat('MMM d')} - ${weekEnd.toFormat('MMM d, yyyy')}`;
+        return `${date.startOf('week').toFormat('MMM d')} - ${date.endOf('week').toFormat('MMM d, yyyy')}`;
       case CalendarViewType.MONTH:
         return date.toFormat('MMMM yyyy');
       default:

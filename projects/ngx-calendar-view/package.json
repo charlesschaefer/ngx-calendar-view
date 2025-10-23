@@ -30,5 +30,6 @@
     "allowedNonPeerDependencies": [
       "luxon"
     ]
-  }
+  },
+  "type": "module"
 }

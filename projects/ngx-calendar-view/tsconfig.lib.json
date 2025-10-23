@@ -5,8 +5,10 @@
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
+    "inlineSourceMap": true,
     "types": [],
-    "lib": ["dom", "esnext"]
+    "lib": ["dom", "esnext"],
+    "moduleResolution": "bundler"
   },
   "include": [
     "src/**/*.ts"

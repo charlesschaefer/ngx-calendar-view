@@ -179,7 +179,9 @@
                       [style.border-left-color]="getEventProjectColor(event)"
                       (mouseenter)="showPopover(event, $event)"
                       (mouseleave)="hidePopover()"
-                      (click)="onEventClick(event); $event.stopPropagation()">
+                      (click)="onEventClick(event); $event.stopPropagation()"
+                      (keydown)="onEventClick(event); $event.stopPropagation()"
+                      tabindex="0">
                       <div class="font-medium text-gray-800">{{ event.title }}</div>
                       @if (event.description) {
                         <div class="text-gray-600 text-xs mt-1">{{ event.description }}</div>
@@ -197,7 +199,9 @@
               @for (slot of timeSlots(); track slot.time.toMillis()) {
                 <div 
                   class="time-slot min-h-slot border-b border-calendar-border p-2 hover:bg-calendar-surface cursor-pointer relative"
-                  (click)="onTimeSlotClick(slot.time)">
+                  (click)="onTimeSlotClick(slot.time)"
+                  (keydown)="onTimeSlotClick(slot.time)"
+                  tabindex="0">
                   <div class="text-xs text-calendar-text-secondary absolute left-2 top-2 z-10">{{ slot.label }}</div>
                   <!-- Events for this time slot -->
                   @for (stackedEvent of getStackedEventsForSlot(getEventsForTimeSlot(slot.time), slot.time); track stackedEvent.event.id) {
@@ -213,7 +217,9 @@
                       [style.width.%]="stackedEvent.width"
                       (mouseenter)="showPopover(stackedEvent.event, $event)"
                       (mouseleave)="hidePopover()"
-                      (click)="onEventClick(stackedEvent.event); $event.stopPropagation()">
+                      (click)="onEventClick(stackedEvent.event); $event.stopPropagation()"
+                      (keydown)="onEventClick(stackedEvent.event); $event.stopPropagation()"
+                      tabindex="0">
                       <div class="font-medium text-gray-800 truncate p-1">{{ stackedEvent.event.title }}</div>
                       @if (stackedEvent.event.description && shouldShowDescription(stackedEvent.event, slotDuration)) {
                         <div class="text-gray-600 truncate px-1 pb-1">{{ stackedEvent.event.description }}</div>
@@ -260,7 +266,9 @@
                   <div 
                     class="all-day-events-day border-b border-calendar-border p-1 hover:bg-calendar-surface cursor-pointer"
                     [style.height]="getAllDayRowHeight()"
-                    (click)="onDayClick(day)">
+                    (click)="onDayClick(day)"
+                    (keydown)="onDayClick(day)"
+                    tabindex="0">
                     @if (getAllDayEvents(day).length > 0) {
                       @for (event of getAllDayEvents(day); track event.id) {
                         <div 
@@ -269,7 +277,9 @@
                           [style.border-left-color]="getEventProjectColor(event)"
                           (mouseenter)="showPopover(event, $event)"
                           (mouseleave)="hidePopover()"
-                          (click)="onEventClick(event); $event.stopPropagation()">
+                          (click)="onEventClick(event); $event.stopPropagation()"
+                          (keydown)="onEventClick(event); $event.stopPropagation()"
+                          tabindex="0">
                           <div class="font-medium text-gray-800 truncate">{{ event.title }}</div>
                         </div>
                       }
@@ -283,7 +293,9 @@
                 @for (slot of timeSlots(); track slot.time.toMillis()) {
                   <div 
                     class="time-slot min-h-slot border-b border-calendar-border hover:bg-calendar-surface cursor-pointer relative"
-                    (click)="onTimeSlotClick(slot.time, day)">
+                    (click)="onTimeSlotClick(slot.time, day)"
+                    (keydown)="onTimeSlotClick(slot.time, day)"
+                    tabindex="0">
                     <!-- Events for this time slot and day -->
                     @for (stackedEvent of getStackedEventsForSlot(getEventsForTimeSlot(slot.time, day), slot.time); track stackedEvent.event.id) {
                       @let position = getEventPositionInSlot(stackedEvent.event, slot.time, stackedEvent.stackIndex);
@@ -298,7 +310,9 @@
                         [style.width.%]="stackedEvent.width"
                         (mouseenter)="showPopover(stackedEvent.event, $event)"
                         (mouseleave)="hidePopover()"
-                        (click)="onEventClick(stackedEvent.event); $event.stopPropagation()">
+                        (click)="onEventClick(stackedEvent.event); $event.stopPropagation()"
+                        (keydown)="onEventClick(stackedEvent.event); $event.stopPropagation()"
+                        tabindex="0">
                         <div class="font-medium text-gray-800 truncate p-1">{{ stackedEvent.event.title }}</div>
                         @if (stackedEvent.event.description && shouldShowDescription(stackedEvent.event, slotDuration)) {
                           <div class="text-gray-600 truncate px-1 pb-1">{{ stackedEvent.event.description }}</div>
@@ -327,7 +341,9 @@
                 class="month-day min-h-24 border border-calendar-border p-2 hover:bg-calendar-surface cursor-pointer relative"
                 [class.bg-calendar-surface]="!isCurrentMonth(day, currentDate())"
                 [class.font-semibold]="isToday(day)"
-                (click)="onDayClick(day)">
+                (click)="onDayClick(day)"
+                (keydown)="onDayClick(day)"
+                tabindex="0">
                 <div class="text-sm text-calendar-text">{{ day.toFormat('d') }}</div>
                 <!-- Events for this day -->
                 @if (getEventsForDay(day).length > 0) {
@@ -339,7 +355,9 @@
                         class="event-card p-1 rounded text-xs cursor-pointer shadow-sm border-l-2 truncate block w-full"
                         [style.background-color]="getEventProjectColor(event) + '20'"
                         [style.border-left-color]="getEventProjectColor(event)"
-                        (click)="showPopover(event, $event); onEventClick(event); $event.stopPropagation()">
+                        (click)="showPopover(event, $event); onEventClick(event); $event.stopPropagation()"
+                        (keydown)="showPopover(event, $event); onEventClick(event); $event.stopPropagation()"
+                        tabindex="0">
                         <div class="font-medium text-gray-800 truncate">{{ event.title }}</div>
                         @if (event.time) {
                           <div class="text-gray-600 text-xs">{{ event.time.toFormat('HH:mm') }}</div>
@@ -349,7 +367,9 @@
                     @if (visibleEvents.hidden > 0) {
                       <div 
                         class="text-xs text-blue-600 hover:text-blue-800 cursor-pointer font-medium mt-1"
-                        (click)="$event.stopPropagation()">
+                        (click)="$event.stopPropagation()"
+                        (keydown)="$event.stopPropagation()"
+                        tabindex="0">
                         +{{ visibleEvents.hidden }} more
                       </div>
                     }
