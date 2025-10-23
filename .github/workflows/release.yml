@@ -28,7 +28,6 @@ jobs:
       
       - name: Build library
         run: npm run build
-      
       - name: Run tests
         run: npm test -- --watch=false --browsers=ChromeHeadless
       
@@ -37,7 +36,14 @@ jobs:
           cd projects/ngx-calendar-view
           npm pack
           mv ngx-calendar-view-*.tgz ../../dist/ngx-calendar-view/
-      
+
+      - name: Extract version from package.json
+        id: version
+        run: |
+          VERSION=$(node -p "require('./projects/ngx-calendar-view/package.json').version")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "tag=v$VERSION" >> $GITHUB_OUTPUT
+
       - name: Create source zip
         run: |
           cd dist/ngx-calendar-view
@@ -51,13 +57,6 @@ jobs:
           ls -la dist/ngx-calendar-view/*.tgz || echo "No .tgz file found"
           echo "Looking for .zip file:"
           ls -la dist/ngx-calendar-view/*.zip || echo "No .zip file found"
-      
-      - name: Extract version from package.json
-        id: version
-        run: |
-          VERSION=$(node -p "require('./projects/ngx-calendar-view/package.json').version")
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "tag=v$VERSION" >> $GITHUB_OUTPUT
       
       - name: Create release
         id: create_release
