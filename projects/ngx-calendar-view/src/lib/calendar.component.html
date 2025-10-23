@@ -204,8 +204,8 @@
                   tabindex="0">
                   <div class="text-xs text-calendar-text-secondary absolute left-2 top-2 z-10">{{ slot.label }}</div>
                   <!-- Events for this time slot -->
-                  @for (stackedEvent of getStackedEventsForSlot(getEventsForTimeSlot(slot.time), slot.time); track stackedEvent.event.id) {
-                    @let position = getEventPositionInSlot(stackedEvent.event, slot.time, stackedEvent.stackIndex);
+                  @for (stackedEvent of getStackedEventsForSlot(getEventsForTimeSlot(slot.time)); track stackedEvent.event.id) {
+                    @let position = getEventPositionInSlot(stackedEvent.event, slot.time);
                     @let slotDuration = config().timeSlotDuration || 30;
                     <div 
                       class="event-card rounded text-xs cursor-pointer shadow-sm border-l-2"
@@ -297,8 +297,8 @@
                     (keydown)="onTimeSlotClick(slot.time, day)"
                     tabindex="0">
                     <!-- Events for this time slot and day -->
-                    @for (stackedEvent of getStackedEventsForSlot(getEventsForTimeSlot(slot.time, day), slot.time); track stackedEvent.event.id) {
-                      @let position = getEventPositionInSlot(stackedEvent.event, slot.time, stackedEvent.stackIndex);
+                    @for (stackedEvent of getStackedEventsForSlot(getEventsForTimeSlot(slot.time, day)); track stackedEvent.event.id) {
+                      @let position = getEventPositionInSlot(stackedEvent.event, slot.time);
                       @let slotDuration = config().timeSlotDuration || 30;
                       <div 
                         class="event-card rounded text-xs cursor-pointer shadow-sm border-l-2"
