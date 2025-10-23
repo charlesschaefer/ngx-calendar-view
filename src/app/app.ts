@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { DateTime } from 'luxon';
-import { CalendarComponent, CalendarEvent, CalendarProject, CalendarConfig, CalendarViewType } from "ngx-calendar-view/src/public-api";
+
+import { CalendarComponent, CalendarEvent, CalendarProject, CalendarConfig, CalendarViewType } from "ngx-calendar-view";
 
 @Component({
   selector: 'app-root',
