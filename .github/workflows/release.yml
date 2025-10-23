@@ -1,0 +1,85 @@
+name: Release
+
+on:
+  push:
+    branches: [release]
+  workflow_dispatch:
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build library
+        run: npm run build:lib
+      
+      - name: Run tests
+        run: npm test -- --watch=false --browsers=ChromeHeadless
+      
+      - name: Extract version from package.json
+        id: version
+        run: |
+          VERSION=$(node -p "require('./projects/ngx-calendar-view/package.json').version")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "tag=v$VERSION" >> $GITHUB_OUTPUT
+      
+      - name: Create release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          release_name: Release ${{ steps.version.outputs.tag }}
+          body: |
+            ## Changes in this release
+            
+            - Built Angular library package
+            - Version: ${{ steps.version.outputs.version }}
+            
+            ## Installation
+            
+            ```bash
+            npm install ngx-calendar-view@${{ steps.version.outputs.version }}
+            ```
+            
+            ## Files
+            
+            The following files are included in this release:
+            - `ngx-calendar-view-${{ steps.version.outputs.version }}.tgz` - NPM package
+            - Source code and documentation
+          draft: false
+          prerelease: false
+      
+      - name: Upload package
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist/ngx-calendar-view/ngx-calendar-view-${{ steps.version.outputs.version }}.tgz
+          asset_name: ngx-calendar-view-${{ steps.version.outputs.version }}.tgz
+          asset_content_type: application/gzip
+      
+      - name: Upload source code
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist/ngx-calendar-view/
+          asset_name: ngx-calendar-view-source-${{ steps.version.outputs.version }}.zip
+          asset_content_type: application/zip
