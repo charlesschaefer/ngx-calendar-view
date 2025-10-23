@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-calendar-view2": {
+    "ngx-calendar-view-demo": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -58,10 +58,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ngx-calendar-view2:build:production"
+              "buildTarget": "ngx-calendar-view-demo:build:production"
             },
             "development": {
-              "buildTarget": "ngx-calendar-view2:build:development"
+              "buildTarget": "ngx-calendar-view-demo:build:development"
             }
           },
           "defaultConfiguration": "development"
