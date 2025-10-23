@@ -81,8 +81,8 @@ jobs:
             ## Files
             
             The following files are included in this release:
-            - `ngx-calendar-view-${{ steps.version.outputs.version }}.tgz` - NPM package
-            - `ngx-calendar-view-source-${{ steps.version.outputs.version }}.zip` - Source code and documentation
+            - `ngx-calendar-view-${{ steps.version.outputs.version }}.tgz` - Source code and documentation
+            - `ngx-calendar-view-source-${{ steps.version.outputs.version }}.zip` - NPM package
           draft: false
           prerelease: false
       
