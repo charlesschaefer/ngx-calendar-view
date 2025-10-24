@@ -488,8 +488,12 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
       if (timeValue && dateValue) {
         const time = DateTime.fromISO(timeValue);
         const date = DateTime.fromISO(dateValue);
-        this.dragDropService.setDropTarget({ date, time });
+        
+        // Set the hovered time slot (green highlighting for specific slot being hovered)
         this.dragDropService.setHoveredTimeSlot({ time, date });
+        
+        // Set the drop target (blue highlighting for valid drop zones)
+        this.dragDropService.setDropTarget({ date, time });
         return;
       }
     }
@@ -502,8 +506,10 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
       
       if (dateValue) {
         const date = DateTime.fromISO(dateValue);
+        // Set drop target for all-day events
         this.dragDropService.setDropTarget({ date });
-        this.dragDropService.setHoveredTimeSlot(null); // Clear hovered time slot for all-day events
+        // Clear hovered time slot for all-day events
+        this.dragDropService.setHoveredTimeSlot(null);
         return;
       }
     }
