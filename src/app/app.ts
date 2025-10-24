@@ -29,7 +29,8 @@ export class App {
     project: '',
     isAllDay: false,
     time: '',
-    duration: 60
+    duration: 60,
+    recurrenceType: ''
   };
 
   // Sample data
@@ -158,6 +159,16 @@ export class App {
     }
   };
 
+  // Recurrence type options for the form
+  recurrenceTypeOptions = [
+    { value: '', label: 'No recurrence' },
+    { value: CalendarRecurrenceType.DAILY, label: 'Daily' },
+    { value: CalendarRecurrenceType.WEEKLY, label: 'Weekly' },
+    { value: CalendarRecurrenceType.WEEKDAY, label: 'Weekdays only' },
+    { value: CalendarRecurrenceType.MONTHLY, label: 'Monthly' },
+    { value: CalendarRecurrenceType.YEARLY, label: 'Yearly' }
+  ];
+
   onNewEvent(event: { date: DateTime; time?: DateTime }): void {
     console.log('onNewEvent', event);
     this.newEventData.set(event);
@@ -218,7 +229,8 @@ export class App {
           description: this.eventForm.description,
           project: this.eventForm.project,
           duration: this.eventForm.isAllDay ? undefined : this.eventForm.duration,
-          time: this.eventForm.isAllDay ? undefined : this.parseTime()
+          time: this.eventForm.isAllDay ? undefined : this.parseTime(),
+          recurrenceType: this.eventForm.recurrenceType ? this.eventForm.recurrenceType as CalendarRecurrenceType : undefined
         };
         events[eventIndex] = updatedEvent;
         this.sampleEvents.set([...events]);
@@ -232,7 +244,8 @@ export class App {
         project: this.eventForm.project,
         date: this.newEventData()!.date,
         time: this.eventForm.isAllDay ? undefined : this.parseTime(),
-        duration: this.eventForm.isAllDay ? undefined : this.eventForm.duration
+        duration: this.eventForm.isAllDay ? undefined : this.eventForm.duration,
+        recurrenceType: this.eventForm.recurrenceType ? this.eventForm.recurrenceType as CalendarRecurrenceType : undefined
       };
       this.sampleEvents.set([...events, newEvent]);
     }
@@ -256,7 +269,8 @@ export class App {
       project: '',
       isAllDay: false,
       time: '',
-      duration: 60
+      duration: 60,
+      recurrenceType: ''
     };
   }
 
@@ -267,7 +281,8 @@ export class App {
       project: event.project || '',
       isAllDay: !event.time,
       time: event.time ? event.time.toFormat('HH:mm') : '',
-      duration: event.duration || 60
+      duration: event.duration || 60,
+      recurrenceType: event.recurrenceType || ''
     };
   }
 
