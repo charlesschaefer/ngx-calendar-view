@@ -208,6 +208,7 @@
                 <div 
                   class="time-slot min-h-slot border-b border-calendar-border p-2 hover:bg-calendar-surface cursor-pointer relative"
                   [class.drop-zone-active]="dragState().isDragging && dragState().dropTarget?.date?.toISODate() === currentDate().toISODate() && dragState().dropTarget?.time?.toISODate() === slot.time.toISODate()"
+                  [class.drag-hover-active]="dragState().isDragging && isHoveringTimeSlot(slot.time, currentDate())"
                   [attr.data-time]="slot.time.toISO()"
                   [attr.data-date]="currentDate().toISODate()"
                   (click)="onTimeSlotClick(slot.time)"
@@ -317,6 +318,7 @@
                   <div 
                     class="time-slot min-h-slot border-b border-calendar-border hover:bg-calendar-surface cursor-pointer relative"
                     [class.drop-zone-active]="dragState().isDragging && dragState().dropTarget?.date?.toISODate() === day.toISODate() && dragState().dropTarget?.time?.toISODate() === slot.time.toISODate()"
+                    [class.drag-hover-active]="dragState().isDragging && isHoveringTimeSlot(slot.time, day)"
                     [attr.data-time]="slot.time.toISO()"
                     [attr.data-date]="day.toISODate()"
                     (click)="onTimeSlotClick(slot.time, day)"
@@ -420,6 +422,24 @@
       }
     }
   </div>
+
+  <!-- Drag Preview -->
+  @if (dragState().isDragging && dragState().draggedEvent) {
+    <div 
+      class="drag-preview fixed pointer-events-none z-50"
+      [style.left.px]="dragState().dragPosition?.x || 0"
+      [style.top.px]="dragState().dragPosition?.y || 0">
+      <div 
+        class="event-card rounded text-xs shadow-lg border-l-2 p-2"
+        [style.background-color]="getEventProjectColor(dragState().draggedEvent!)"
+        [style.border-left-color]="getEventProjectColor(dragState().draggedEvent!)">
+        <div class="font-medium text-gray-800 truncate">{{ dragState().draggedEvent!.title }}</div>
+        @if (dragState().draggedEvent!.description) {
+          <div class="text-gray-600 truncate text-xs mt-1">{{ dragState().draggedEvent!.description }}</div>
+        }
+      </div>
+    </div>
+  }
 
   <!-- Event Details Popover -->
   @if (shouldShowPopover && popoverEventData) {

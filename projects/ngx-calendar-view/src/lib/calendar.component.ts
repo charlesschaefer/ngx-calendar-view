@@ -232,6 +232,14 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.popoverPosition();
   }
 
+  // Check if hovering over a specific time slot
+  isHoveringTimeSlot(time: DateTime, date: DateTime): boolean {
+    const hoveredSlot = this.dragDropService.getHoveredTimeSlot();
+    return hoveredSlot !== null && 
+           hoveredSlot.time.toISODate() === time.toISODate() && 
+           hoveredSlot.date.toISODate() === date.toISODate();
+  }
+
   // Calculate event position for day/week views
   calculateEventPosition(event: CalendarEvent, slotDuration = 30): { top: number, height: number } {
     const eventTime = event.time || event.date;
@@ -481,6 +489,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
         const time = DateTime.fromISO(timeValue);
         const date = DateTime.fromISO(dateValue);
         this.dragDropService.setDropTarget({ date, time });
+        this.dragDropService.setHoveredTimeSlot({ time, date });
         return;
       }
     }
@@ -494,12 +503,14 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
       if (dateValue) {
         const date = DateTime.fromISO(dateValue);
         this.dragDropService.setDropTarget({ date });
+        this.dragDropService.setHoveredTimeSlot(null); // Clear hovered time slot for all-day events
         return;
       }
     }
 
-    // Clear drop target if not over a valid drop zone
+    // Clear drop target and hovered time slot if not over a valid drop zone
     this.dragDropService.setDropTarget(null);
+    this.dragDropService.setHoveredTimeSlot(null);
   }
 
   private handleDrop(): void {

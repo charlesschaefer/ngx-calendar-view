@@ -19,6 +19,7 @@ export interface DragState {
   dragPosition: DragPosition | null;
   dropTarget: DropTarget | null;
   dragElement: HTMLElement | null;
+  hoveredTimeSlot: { time: DateTime; date: DateTime } | null;
 }
 
 @Injectable({
@@ -30,7 +31,8 @@ export class DragDropService {
     draggedEvent: null,
     dragPosition: null,
     dropTarget: null,
-    dragElement: null
+    dragElement: null,
+    hoveredTimeSlot: null
   });
 
   /**
@@ -53,7 +55,8 @@ export class DragDropService {
       draggedEvent: event,
       dragPosition: position,
       dropTarget: null,
-      dragElement: element
+      dragElement: element,
+      hoveredTimeSlot: null
     });
   }
 
@@ -92,7 +95,8 @@ export class DragDropService {
       draggedEvent: null,
       dragPosition: null,
       dropTarget: null,
-      dragElement: null
+      dragElement: null,
+      hoveredTimeSlot: null
     });
   }
 
@@ -129,5 +133,25 @@ export class DragDropService {
    */
   getDragElement(): HTMLElement | null {
     return this._dragState().dragElement;
+  }
+
+  /**
+   * Set the hovered time slot during drag
+   */
+  setHoveredTimeSlot(timeSlot: { time: DateTime; date: DateTime } | null): void {
+    const currentState = this._dragState();
+    if (currentState.isDragging) {
+      this._dragState.set({
+        ...currentState,
+        hoveredTimeSlot: timeSlot
+      });
+    }
+  }
+
+  /**
+   * Get the currently hovered time slot
+   */
+  getHoveredTimeSlot(): { time: DateTime; date: DateTime } | null {
+    return this._dragState().hoveredTimeSlot;
   }
 }

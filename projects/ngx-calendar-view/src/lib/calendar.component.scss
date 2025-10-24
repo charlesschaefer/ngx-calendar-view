@@ -59,6 +59,12 @@
     border-color: #3b82f6;
     box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.3);
   }
+  
+  &.drag-hover-active {
+    background-color: rgba(34, 197, 94, 0.08);
+    border-color: #22c55e;
+    box-shadow: inset 0 0 0 1px rgba(34, 197, 94, 0.2);
+  }
 }
 
 // Ensure time slots container allows overflow
@@ -200,5 +206,20 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+// Drag preview styles
+.drag-preview {
+  transform: translate(-50%, -50%);
+  opacity: 0.9;
+  transition: none; // Disable transitions for smooth following
+  
+  .event-card {
+    min-width: 200px;
+    max-width: 300px;
+    transform: rotate(2deg); // Slight rotation for visual effect
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.8);
   }
 }
