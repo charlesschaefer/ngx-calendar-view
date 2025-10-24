@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DateTime } from 'luxon';
 
-import { CalendarEvent, CalendarViewType, WorkingHours } from '../models';
+import { CalendarEvent, CalendarViewType, WorkingHours, CalendarRecurrenceType } from '../models';
 
 export interface TimeSlot {
   time: DateTime;
@@ -196,5 +196,157 @@ export class CalendarUtilsService {
 
   isCurrentMonth(date: DateTime, currentMonth: DateTime): boolean {
     return date.hasSame(currentMonth, 'month');
+  }
+
+  /**
+   * Generates recurring event instances for a given date range
+   */
+  generateRecurringEvents(events: CalendarEvent[], startDate: DateTime, endDate: DateTime): CalendarEvent[] {
+    const recurringEvents: CalendarEvent[] = [];
+    
+    for (const event of events) {
+      if (!event.recurrenceType) {
+        // Non-recurring event, add as-is if it falls within the range
+        const eventDate = event.time || event.date;
+        if (eventDate >= startDate && eventDate <= endDate) {
+          recurringEvents.push(event);
+        }
+        continue;
+      }
+      
+      // Generate recurring instances
+      const instances = this.generateRecurringInstances(event, startDate, endDate);
+      recurringEvents.push(...instances);
+    }
+    
+    return recurringEvents;
+  }
+
+  /**
+   * Generates recurring instances for a single event within a date range
+   */
+  private generateRecurringInstances(event: CalendarEvent, startDate: DateTime, endDate: DateTime): CalendarEvent[] {
+    const instances: CalendarEvent[] = [];
+    const originalDate = event.time || event.date;
+    
+    // If the original event falls within the range, add it
+    if (originalDate >= startDate && originalDate <= endDate) {
+      instances.push(event);
+    }
+    
+    // Generate future instances
+    let currentDate = originalDate;
+    const maxIterations = 1000; // Prevent infinite loops
+    let iterations = 0;
+    
+    while (currentDate < endDate && iterations < maxIterations) {
+      currentDate = this.getNextRecurrenceDate(currentDate, event.recurrenceType!);
+      
+      if (currentDate > endDate) {
+        break;
+      }
+      
+      if (currentDate >= startDate) {
+        const recurringInstance = this.createRecurringInstance(event, currentDate);
+        instances.push(recurringInstance);
+      }
+      
+      iterations++;
+    }
+    
+    return instances;
+  }
+
+  /**
+   * Gets the next recurrence date based on the recurrence type
+   */
+  private getNextRecurrenceDate(currentDate: DateTime, recurrenceType: CalendarRecurrenceType): DateTime {
+    switch (recurrenceType) {
+      case CalendarRecurrenceType.DAILY:
+        return currentDate.plus({ days: 1 });
+      
+      case CalendarRecurrenceType.WEEKLY:
+        return currentDate.plus({ weeks: 1 });
+      
+      case CalendarRecurrenceType.WEEKDAY: {
+        // Next weekday (Monday-Friday)
+        let nextWeekday = currentDate.plus({ days: 1 });
+        while (nextWeekday.weekday > 5) { // Skip weekends (6=Saturday, 7=Sunday)
+          nextWeekday = nextWeekday.plus({ days: 1 });
+        }
+        return nextWeekday;
+      }
+      
+      case CalendarRecurrenceType.MONTHLY:
+        return currentDate.plus({ months: 1 });
+      
+      case CalendarRecurrenceType.YEARLY:
+        return currentDate.plus({ years: 1 });
+      
+      default:
+        return currentDate.plus({ days: 1 });
+    }
+  }
+
+  /**
+   * Creates a recurring instance of an event with the new date/time
+   */
+  private createRecurringInstance(originalEvent: CalendarEvent, newDate: DateTime): CalendarEvent {
+    const instance: CalendarEvent = {
+      ...originalEvent,
+      id: `${originalEvent.id}_${newDate.toISODate()}`, // Unique ID for each instance
+    };
+    
+    if (originalEvent.time) {
+      // Preserve the original time but update the date
+      instance.time = newDate.set({
+        hour: originalEvent.time.hour,
+        minute: originalEvent.time.minute,
+        second: originalEvent.time.second,
+        millisecond: originalEvent.time.millisecond
+      });
+      instance.date = instance.time.startOf('day');
+    } else {
+      // All-day event
+      instance.date = newDate.startOf('day');
+    }
+    
+    return instance;
+  }
+
+  /**
+   * Enhanced event filtering methods that include recurring events
+   */
+  getEventsForDateWithRecurrence(events: CalendarEvent[], date: DateTime): CalendarEvent[] {
+    const startOfDay = date.startOf('day');
+    const endOfDay = date.endOf('day');
+    const eventsWithRecurrence = this.generateRecurringEvents(events, startOfDay, endOfDay);
+    
+    return eventsWithRecurrence.filter(event => {
+      const eventDate = event.time || event.date;
+      return eventDate.hasSame(date, 'day');
+    });
+  }
+
+  getEventsForWeekWithRecurrence(events: CalendarEvent[], weekStart: DateTime): CalendarEvent[] {
+    const weekEnd = weekStart.plus({ days: 6 }).endOf('day');
+    const startOfWeek = weekStart.startOf('day');
+    const eventsWithRecurrence = this.generateRecurringEvents(events, startOfWeek, weekEnd);
+    
+    return eventsWithRecurrence.filter(event => {
+      const eventDate = event.time || event.date;
+      return eventDate >= startOfWeek && eventDate <= weekEnd;
+    });
+  }
+
+  getEventsForMonthWithRecurrence(events: CalendarEvent[], monthStart: DateTime): CalendarEvent[] {
+    const monthEnd = monthStart.endOf('month');
+    const startOfMonth = monthStart.startOf('month');
+    const eventsWithRecurrence = this.generateRecurringEvents(events, startOfMonth, monthEnd);
+    
+    return eventsWithRecurrence.filter(event => {
+      const eventDate = event.time || event.date;
+      return eventDate >= startOfMonth && eventDate <= monthEnd;
+    });
   }
 }

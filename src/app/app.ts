@@ -4,7 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { DateTime } from 'luxon';
 
-import { CalendarComponent, CalendarEvent, CalendarProject, CalendarConfig, CalendarViewType } from "ngx-calendar-view";
+import { CalendarComponent, CalendarEvent, CalendarProject, CalendarConfig, CalendarViewType, CalendarRecurrenceType } from "ngx-calendar-view";
 
 @Component({
   selector: 'app-root',
@@ -76,6 +76,55 @@ export class App {
       time: DateTime.now().set({ hour: 9, minute: 30 }),
       duration: 60,
       project: 'Work'
+    },
+    // Recurring events examples
+    {
+      id: '6',
+      title: 'Daily Standup',
+      description: 'Daily team standup meeting',
+      date: DateTime.fromISO('2025-10-24').startOf('day'),
+      time: DateTime.fromISO('2025-10-24').set({ hour: 9, minute: 0 }),
+      duration: 30,
+      project: 'Work',
+      recurrenceType: CalendarRecurrenceType.DAILY
+    },
+    {
+      id: '7',
+      title: 'Weekly Planning',
+      description: 'Weekly planning session',
+      date: DateTime.fromISO('2025-10-24').startOf('day'),
+      time: DateTime.fromISO('2025-10-24').set({ hour: 10, minute: 0 }),
+      duration: 60,
+      project: 'Work',
+      recurrenceType: CalendarRecurrenceType.WEEKLY
+    },
+    {
+      id: '8',
+      title: 'Gym Session',
+      description: 'Daily gym workout',
+      date: DateTime.fromISO('2025-10-24').startOf('day'),
+      time: DateTime.fromISO('2025-10-24').set({ hour: 18, minute: 0 }),
+      duration: 90,
+      project: 'Health',
+      recurrenceType: CalendarRecurrenceType.WEEKDAY
+    },
+    {
+      id: '9',
+      title: 'Monthly Review',
+      description: 'Monthly project review',
+      date: DateTime.fromISO('2025-10-24').startOf('day'),
+      time: DateTime.fromISO('2025-10-24').set({ hour: 15, minute: 0 }),
+      duration: 120,
+      project: 'Work',
+      recurrenceType: CalendarRecurrenceType.MONTHLY
+    },
+    {
+      id: '10',
+      title: 'Recurring All-Day Event',
+      description: 'This is a recurring all-day event',
+      date: DateTime.fromISO('2025-10-24').startOf('day'),
+      project: 'Personal',
+      recurrenceType: CalendarRecurrenceType.DAILY
     }
   ]);
 

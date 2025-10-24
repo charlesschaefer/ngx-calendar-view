@@ -121,31 +121,31 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
     return `${totalHeight}rem`;
   }
 
-  // Event-related computed properties
+  // Event-related computed properties with recurring events support
   eventsForCurrentDate = computed(() => {
     const events = this.events();
     const current = this.currentDate();
-    return this.calendarUtils.getEventsForDate(events, current);
+    return this.calendarUtils.getEventsForDateWithRecurrence(events, current);
   });
 
   eventsForWeek = computed(() => {
     const events = this.events();
     const current = this.currentDate();
     const weekStart = current.startOf('week');
-    return this.calendarUtils.getEventsForWeek(events, weekStart);
+    return this.calendarUtils.getEventsForWeekWithRecurrence(events, weekStart);
   });
 
   eventsForMonth = computed(() => {
     const events = this.events();
     const current = this.currentDate();
     const monthStart = current.startOf('month');
-    return this.calendarUtils.getEventsForMonth(events, monthStart);
+    return this.calendarUtils.getEventsForMonthWithRecurrence(events, monthStart);
   });
 
-  // Get events for a specific day
+  // Get events for a specific day with recurring events support
   getEventsForDay(date: DateTime): CalendarEvent[] {
     const events = this.events();
-    return this.calendarUtils.getEventsForDate(events, date);
+    return this.calendarUtils.getEventsForDateWithRecurrence(events, date);
   }
 
   // Get all-day events for a specific day

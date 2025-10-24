@@ -8,6 +8,7 @@ export interface CalendarEvent {
   time?: DateTime;
   duration?: number; // in minutes
   project?: string;
+  recurrenceType?: CalendarRecurrenceType;
 }
 
 export interface CalendarProject {
@@ -36,6 +37,14 @@ export enum CalendarViewType {
   DAY = 'day',
   WEEK = 'week',
   MONTH = 'month'
+}
+
+export enum CalendarRecurrenceType {
+  DAILY = 'daily',
+  WEEKLY = 'weekly',
+  WEEKDAY = 'weekday',
+  MONTHLY = 'monthly',
+  YEARLY = 'yearly'
 }
 
 export interface CalendarOutputs {
