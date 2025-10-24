@@ -655,4 +655,30 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
     const isActive = this.currentViewType() === viewType;
     return `view-type-button ${isActive ? 'active' : 'inactive'}`;
   }
+
+  // Check if we're currently viewing today's date in the current view
+  isViewingToday(): boolean {
+    const current = this.currentDate();
+    const today = DateTime.now();
+    const viewType = this.currentViewType();
+
+    switch (viewType) {
+      case CalendarViewType.DAY:
+        return current.hasSame(today, 'day');
+      case CalendarViewType.WEEK: {
+        const weekStart = current.startOf('week');
+        const weekEnd = current.endOf('week');
+        return today >= weekStart && today <= weekEnd;
+      }
+      case CalendarViewType.MONTH:
+        return current.hasSame(today, 'month');
+      default:
+        return false;
+    }
+  }
+
+  getTodayButtonClass(): string {
+    const isViewingToday = this.isViewingToday();
+    return `today-button ${isViewingToday ? 'viewing-today' : 'not-viewing-today'}`;
+  }
 }

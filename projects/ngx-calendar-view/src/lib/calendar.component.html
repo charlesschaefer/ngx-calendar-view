@@ -15,7 +15,7 @@
               </button>
               <button 
                 (click)="navigateToday()"
-                class="px-3 py-1 text-sm bg-calendar-primary text-white rounded-md hover:bg-opacity-90 transition-colors">
+                [class]="getTodayButtonClass()">
                 Today
               </button>
               <button 
@@ -30,7 +30,7 @@
               {{ formatDateForDisplay(currentDate(), CalendarViewType.DAY) }}
             </h2>
             @if (config().showViewTypeSelector !== false) {
-              <div class="flex items-center space-x-2">
+              <div class="view-type-selector flex items-center space-x-2">
                 @for (viewType of viewTypes; track viewType) {
                   <button 
                     (click)="setViewType(viewType)"
@@ -56,7 +56,7 @@
               </button>
               <button 
                 (click)="navigateToday()"
-                class="px-3 py-1 text-sm bg-calendar-primary text-white rounded-md hover:bg-opacity-90 transition-colors">
+                [class]="getTodayButtonClass()">
                 Today
               </button>
               <button 
@@ -71,7 +71,7 @@
               {{ formatDateForDisplay(currentDate(), CalendarViewType.WEEK) }}
             </h2>
             @if (config().showViewTypeSelector !== false) {
-              <div class="flex items-center space-x-2">
+              <div class="view-type-selector flex items-center space-x-2">
                 @for (viewType of viewTypes; track viewType) {
                   <button 
                     (click)="setViewType(viewType)"
@@ -97,7 +97,7 @@
               </button>
               <button 
                 (click)="navigateToday()"
-                class="px-3 py-1 text-sm bg-calendar-primary text-white rounded-md hover:bg-opacity-90 transition-colors">
+                [class]="getTodayButtonClass()">
                 Today
               </button>
               <button 
@@ -112,7 +112,7 @@
               {{ formatDateForDisplay(currentDate(), CalendarViewType.MONTH) }}
             </h2>
             @if (config().showViewTypeSelector !== false) {
-              <div class="flex items-center space-x-2">
+              <div class="view-type-selector flex items-center space-x-2">
                 @for (viewType of viewTypes; track viewType) {
                   <button 
                     (click)="setViewType(viewType)"

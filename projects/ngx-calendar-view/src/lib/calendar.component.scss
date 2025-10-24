@@ -9,15 +9,83 @@
 }
 
 .view-type-button {
-  @apply px-3 py-1 text-sm rounded-md transition-colors;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  border: 1px solid;
 }
 
 .view-type-button.active {
-  @apply bg-calendar-primary text-white;
+  background-color: var(--calendar-primary);
+  color: var(--calendar-background);
+  border-color: var(--calendar-primary);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
 }
 
 .view-type-button.inactive {
-  @apply bg-calendar-surface text-calendar-text hover:bg-calendar-border;
+  background-color: var(--calendar-background);
+  color: var(--calendar-text);
+  border-color: var(--calendar-border);
+}
+
+.view-type-button.inactive:hover {
+  background-color: var(--calendar-surface);
+  border-color: var(--calendar-primary);
+  color: var(--calendar-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+// View type selector container
+.view-type-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: var(--calendar-surface);
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--calendar-border);
+}
+
+// Today button styles
+.today-button {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+  border: 1px solid;
+}
+
+.today-button.viewing-today {
+  background-color: var(--calendar-primary);
+  color: var(--calendar-background);
+  border-color: var(--calendar-primary);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+}
+
+.today-button.viewing-today:hover {
+  opacity: 0.9;
+}
+
+.today-button.not-viewing-today {
+  background-color: #f3f4f6;
+  color: #6b7280;
+  border-color: #d1d5db;
+}
+
+.today-button.not-viewing-today:hover {
+  background-color: #e5e7eb;
+  color: #374151;
+  border-color: #9ca3af;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 // Event card styles with proper positioning
