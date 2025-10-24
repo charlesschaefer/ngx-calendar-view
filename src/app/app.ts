@@ -110,6 +110,7 @@ export class App {
   };
 
   onNewEvent(event: { date: DateTime; time?: DateTime }): void {
+    console.log('onNewEvent', event);
     this.newEventData.set(event);
     this.isEditing.set(false);
     this.currentEvent.set(null);
@@ -119,6 +120,7 @@ export class App {
   }
 
   onClickEvent(event: CalendarEvent): void {
+    console.log('onClickEvent', event);
     this.currentEvent.set(event);
     this.isEditing.set(true);
     this.newEventData.set(null);
@@ -127,13 +129,17 @@ export class App {
   }
 
   onMoveEvent(moveData: { event: CalendarEvent; newDate: DateTime; newTime?: DateTime }): void {
+    console.log('onMoveEvent', moveData);
     const events = this.sampleEvents();
     const eventIndex = events.findIndex(e => e.id === moveData.event.id);
+    const newDate = moveData.newDate;
+    const newTime = moveData.newTime;
+    const newDateTime = newDate.set({ hour: newTime?.hour || 0, minute: newTime?.minute || 0, second: 0, millisecond: 0 });
     if (eventIndex !== -1) {
       const updatedEvent = {
         ...moveData.event,
-        date: moveData.newDate,
-        time: moveData.newTime || moveData.event.time
+        date: newDateTime,
+        time: newDateTime || moveData.event.time
       };
       events[eventIndex] = updatedEvent;
       this.sampleEvents.set([...events]);

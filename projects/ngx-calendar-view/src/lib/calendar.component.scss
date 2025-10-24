@@ -31,6 +31,20 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     z-index: 20; // Bring to front on hover
   }
+  
+  // Drag states
+  &.dragging {
+    opacity: 0.7;
+    transform: scale(1.05);
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    cursor: grabbing;
+  }
+  
+  &.drag-over {
+    background-color: rgba(59, 130, 246, 0.1) !important;
+    border-color: #3b82f6 !important;
+  }
 }
 
 // Time slot styles for better event positioning
@@ -38,6 +52,13 @@
   min-height: 2rem;
   position: relative;
   overflow: visible; // Allow events to extend beyond slot boundaries
+  transition: all 0.2s ease;
+  
+  &.drop-zone-active {
+    background-color: rgba(59, 130, 246, 0.1);
+    border-color: #3b82f6;
+    box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.3);
+  }
 }
 
 // Ensure time slots container allows overflow
@@ -68,6 +89,13 @@
 
 .all-day-events-container {
   min-height: 2rem;
+  transition: all 0.2s ease;
+  
+  &.drop-zone-active {
+    background-color: rgba(59, 130, 246, 0.1);
+    border-color: #3b82f6;
+    box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.3);
+  }
 }
 
 .all-day-event-card {
@@ -88,6 +116,13 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  transition: all 0.2s ease;
+  
+  &.drop-zone-active {
+    background-color: rgba(59, 130, 246, 0.1);
+    border-color: #3b82f6;
+    box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.3);
+  }
   
   .all-day-event-card {
     margin-bottom: 0.25rem;
@@ -109,6 +144,13 @@
 // Month day styles for event display
 .month-day {
   min-height: 6rem;
+  transition: all 0.2s ease;
+  
+  &.drop-zone-active {
+    background-color: rgba(59, 130, 246, 0.1);
+    border-color: #3b82f6;
+    box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.3);
+  }
   
   .event-card {
     margin-bottom: 0.125rem; // space-y-0.5 equivalent

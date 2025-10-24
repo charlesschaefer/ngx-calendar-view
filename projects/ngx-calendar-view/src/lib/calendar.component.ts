@@ -1,9 +1,13 @@
-import { Component, input, output, OnInit, OnDestroy, ChangeDetectionStrategy, inject, computed, signal } from '@angular/core';
+import { Component, input, output, OnInit, OnDestroy, ChangeDetectionStrategy, inject, computed, signal, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DateTime } from 'luxon';
 
+
 import { CalendarEvent, CalendarProject, CalendarConfig, CalendarViewType } from './models';
-import { CalendarStateService, CalendarUtilsService, ColorGeneratorService } from './services';
+import { CalendarStateService, CalendarUtilsService, ColorGeneratorService, DragDropService, GestureService } from './services';
+
+
+const EVENT_CARD_OPACITY_HEX = 'AA';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -14,7 +18,7 @@ import { CalendarStateService, CalendarUtilsService, ColorGeneratorService } fro
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.scss'
 })
-export class CalendarComponent implements OnInit, OnDestroy {
+export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
   // Inputs
   events = input<CalendarEvent[]>([]);
   projects = input<CalendarProject[]>([]);
@@ -29,6 +33,9 @@ export class CalendarComponent implements OnInit, OnDestroy {
   private calendarState = inject(CalendarStateService);
   private calendarUtils = inject(CalendarUtilsService);
   private colorGenerator = inject(ColorGeneratorService);
+  private dragDropService = inject(DragDropService);
+  private gestureService = inject(GestureService);
+  private elementRef = inject(ElementRef);
 
   // Component state
   private isDestroyed = signal(false);
@@ -38,6 +45,9 @@ export class CalendarComponent implements OnInit, OnDestroy {
   // Computed properties
   currentDate = computed(() => this.calendarState.currentDate());
   currentViewType = computed(() => this.calendarState.currentViewType());
+  
+  // Drag state
+  dragState = computed(() => this.dragDropService.getDragState());
   
   // View types
   viewTypes = Object.values(CalendarViewType);
@@ -54,7 +64,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   weekDays = computed(() => {
     const current = this.currentDate();
     const weekStart = current.startOf('week');
-    const days = [];
+    const days: DateTime[] = [];
     for (let i = 0; i < 7; i++) {
       days.push(weekStart.plus({ days: i }));
     }
@@ -67,7 +77,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   monthOptions = computed(() => {
     const current = this.currentDate();
-    const options = [];
+    const options: { value: string | null; label: string }[] = [];
     for (let i = -6; i <= 6; i++) {
       const month = current.plus({ months: i });
       options.push({
@@ -154,7 +164,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   getEventProjectColor(event: CalendarEvent): string {
     const projects = this.projects();
     const project = projects.find(p => p.title === event.project);
-    return project?.color || '#64748b'; // default gray color
+    return (project?.color || '#64748b') + EVENT_CARD_OPACITY_HEX; // default gray color
   }
 
   // Get events for a specific time slot (only show timed events that START in this slot)
@@ -393,9 +403,132 @@ export class CalendarComponent implements OnInit, OnDestroy {
     this.calendarState.setProjects(projects);
   }
 
+  ngAfterViewInit(): void {
+    this.setupGestureHandling();
+  }
+
   ngOnDestroy(): void {
     this.isDestroyed.set(true);
     this.colorGenerator.reset();
+  }
+
+  // HammerJS Gesture Handling
+  private setupGestureHandling(): void {
+    const element = this.elementRef.nativeElement;
+    const hammer = this.gestureService.buildHammer(element);
+
+    // Handle pan gestures for drag-and-drop
+    hammer.on('panstart', (event: HammerInput) => {
+      const target = event.target as HTMLElement;
+      const eventCard = target.closest('.event-card, .all-day-event-card');
+      
+      if (eventCard) {
+        const eventId = eventCard.getAttribute('data-event-id');
+        if (eventId) {
+          const calendarEvent = this.events().find(e => e.id === eventId);
+          if (calendarEvent) {
+            this.dragDropService.startDrag(calendarEvent, {
+              x: event.center.x,
+              y: event.center.y
+            }, eventCard as HTMLElement);
+          }
+        }
+      }
+    });
+
+    hammer.on('panmove', (event: HammerInput) => {
+      const state = this.dragState();
+      if (state.isDragging) {
+        this.dragDropService.updateDragPosition({
+          x: event.center.x,
+          y: event.center.y
+        });
+        
+        // Check for drop targets
+        const elementUnderPointer = document.elementFromPoint(event.center.x, event.center.y);
+        if (elementUnderPointer) {
+          this.checkDropTarget(elementUnderPointer);
+        }
+      }
+    });
+
+    hammer.on('panend', (_event: HammerInput) => {
+      const state = this.dragState();
+      if (state.isDragging) {
+        this.handleDrop();
+      }
+    });
+
+    // Handle swipe gestures for navigation
+    hammer.on('swipeleft', () => {
+      this.navigateNext();
+    });
+
+    hammer.on('swiperight', () => {
+      this.navigatePrevious();
+    });
+  }
+
+  private checkDropTarget(element: Element): void {
+    // Check if element is a time slot (for timed events)
+    const timeSlot = element.closest('.time-slot');
+    if (timeSlot) {
+      const timeSlotElement = timeSlot as HTMLElement;
+      const timeValue = timeSlotElement.getAttribute('data-time');
+      const dateValue = timeSlotElement.getAttribute('data-date');
+      
+      if (timeValue && dateValue) {
+        const time = DateTime.fromISO(timeValue);
+        const date = DateTime.fromISO(dateValue);
+        this.dragDropService.setDropTarget({ date, time });
+        return;
+      }
+    }
+
+    // Check if element is a day cell (for all-day events or month view)
+    const dayCell = element.closest('.month-day, .all-day-events-day, .all-day-events-container');
+    if (dayCell) {
+      const dayElement = dayCell as HTMLElement;
+      const dateValue = dayElement.getAttribute('data-date');
+      
+      if (dateValue) {
+        const date = DateTime.fromISO(dateValue);
+        this.dragDropService.setDropTarget({ date });
+        return;
+      }
+    }
+
+    // Clear drop target if not over a valid drop zone
+    this.dragDropService.setDropTarget(null);
+  }
+
+  private handleDrop(): void {
+    const state = this.dragState();
+    if (state.isDragging && state.draggedEvent && state.dropTarget) {
+      const draggedEvent = state.draggedEvent;
+      const dropTarget = state.dropTarget;
+      
+      // Determine the new time based on the drop target and current view
+      let newTime: DateTime | undefined;
+      
+      if (dropTarget.time) {
+        // Dropped on a time slot - use the slot's time
+        newTime = dropTarget.time;
+      } else if (draggedEvent.time && this.currentViewType() === CalendarViewType.MONTH) {
+        // Dropped on a day in month view - preserve original time
+        newTime = draggedEvent.time;
+      } else if (!draggedEvent.time) {
+        // All-day event - no time needed
+        newTime = undefined;
+      }
+      
+      this.moveEvent.emit({
+        event: draggedEvent,
+        newDate: dropTarget.date,
+        newTime
+      });
+    }
+    this.dragDropService.endDrag();
   }
 
   // Navigation methods
@@ -419,6 +552,55 @@ export class CalendarComponent implements OnInit, OnDestroy {
     const target = event.target as HTMLSelectElement;
     const selectedDate = DateTime.fromISO(target.value);
     this.calendarState.setCurrentDate(selectedDate);
+  }
+
+  // Drag and drop handlers
+  onEventDragStart(event: CalendarEvent, mouseEvent: MouseEvent): void {
+    this.dragDropService.startDrag(event, { 
+      x: mouseEvent.clientX, 
+      y: mouseEvent.clientY 
+    }, mouseEvent.target as HTMLElement);
+  }
+
+  onEventDragMove(mouseEvent: MouseEvent): void {
+    const state = this.dragState();
+    if (state.isDragging) {
+      this.dragDropService.updateDragPosition({ 
+        x: mouseEvent.clientX, 
+        y: mouseEvent.clientY 
+      });
+    }
+  }
+
+  onEventDragEnd(): void {
+    const state = this.dragState();
+    if (state.isDragging && state.draggedEvent && state.dropTarget) {
+      this.moveEvent.emit({
+        event: state.draggedEvent,
+        newDate: state.dropTarget.date,
+        newTime: state.dropTarget.time
+      });
+    }
+    this.dragDropService.endDrag();
+  }
+
+  onTimeSlotDragOver(time: DateTime, date?: DateTime, event?: DragEvent): void {
+    event?.preventDefault();
+    const targetDate = date || this.currentDate();
+    this.dragDropService.setDropTarget({ date: targetDate, time });
+  }
+
+  onTimeSlotDragLeave(): void {
+    this.dragDropService.setDropTarget(null);
+  }
+
+  onDayDragOver(date: DateTime, event?: DragEvent): void {
+    event?.preventDefault();
+    this.dragDropService.setDropTarget({ date });
+  }
+
+  onDayDragLeave(): void {
+    this.dragDropService.setDropTarget(null);
   }
 
   // Event handlers
