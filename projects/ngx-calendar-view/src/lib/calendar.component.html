@@ -189,8 +189,8 @@
                       (click)="onEventClick(event); $event.stopPropagation()"
                       (keydown)="onEventClick(event); $event.stopPropagation()"
                       tabindex="0">
-                      Cor: {{getEventProjectColor(event)}}
-                      <div class="font-medium text-gray-800">{{ event.title }} Cor: {{getEventProjectColor(event)}}</div>
+                    
+                      <div class="font-medium text-gray-800">{{ event.title }}</div>
                       @if (event.description) {
                         <div class="text-gray-600 text-xs mt-1">{{ event.description }}</div>
                       }
@@ -235,8 +235,8 @@
                         (click)="onEventClick(stackedEvent.event); $event.stopPropagation()"
                         (keydown)="onEventClick(stackedEvent.event); $event.stopPropagation()"
                         tabindex="0">
-                        Cor: {{getEventProjectColor(stackedEvent.event)}}  
-                      <div class="font-medium text-gray-800 truncate p-1">{{ stackedEvent.event.title }} Cor: {{getEventProjectColor(stackedEvent.event)}}</div>
+                        
+                      <div class="font-medium text-gray-800 truncate p-1">{{ stackedEvent.event.title }}</div>
                       @if (stackedEvent.event.description && shouldShowDescription(stackedEvent.event, slotDuration)) {
                         <div class="text-gray-600 truncate px-1 pb-1">{{ stackedEvent.event.description }}</div>
                       }
@@ -302,8 +302,8 @@
                           (click)="onEventClick(event); $event.stopPropagation()"
                           (keydown)="onEventClick(event); $event.stopPropagation()"
                           tabindex="0">
-                          Cor: {{getEventProjectColor(event)}}
-                          <div class="font-medium text-gray-800 truncate">{{ event.title }} Cor: {{getEventProjectColor(event)}}</div>
+                        
+                          <div class="font-medium text-gray-800 truncate">{{ event.title }}</div>
                         </div>
                       }
                     } @else {
@@ -343,8 +343,8 @@
                         (click)="onEventClick(stackedEvent.event); $event.stopPropagation()"
                         (keydown)="onEventClick(stackedEvent.event); $event.stopPropagation()"
                         tabindex="0">
-                        Cor: {{getEventProjectColor(stackedEvent.event)}}
-                        <div class="font-medium text-gray-800 truncate p-1">{{ stackedEvent.event.title }} Cor: {{getEventProjectColor(stackedEvent.event)}}</div>
+                      
+                        <div class="font-medium text-gray-800 truncate p-1">{{ stackedEvent.event.title }}</div>
                         @if (stackedEvent.event.description && shouldShowDescription(stackedEvent.event, slotDuration)) {
                           <div class="text-gray-600 truncate px-1 pb-1">{{ stackedEvent.event.description }}</div>
                         }
@@ -395,8 +395,8 @@
                         (click)="showPopover(event, $event); onEventClick(event); $event.stopPropagation()"
                         (keydown)="showPopover(event, $event); onEventClick(event); $event.stopPropagation()"
                         tabindex="0">
-                        Cor: {{getEventProjectColor(event)}}
-                        <div class="font-medium text-gray-800 truncate">{{ event.title }} Cor: {{getEventProjectColor(event)}}</div>
+                      
+                        <div class="font-medium text-gray-800 truncate">{{ event.title }}</div>
                         @if (event.time) {
                           <div class="text-gray-600 text-xs">{{ event.time.toFormat('HH:mm') }}</div>
                         }

@@ -7,7 +7,7 @@ import { CalendarEvent, CalendarProject, CalendarConfig, CalendarViewType } from
 import { CalendarStateService, CalendarUtilsService, ColorGeneratorService, DragDropService, GestureService } from './services';
 
 
-const EVENT_CARD_OPACITY_HEX = 'AA';
+const EVENT_CARD_OPACITY_HEX = '99';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
