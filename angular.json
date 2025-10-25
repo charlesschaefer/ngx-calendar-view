@@ -28,6 +28,11 @@
             ],
             "styles": [
               "src/styles.scss"
+            ],
+            "outputPath": "dist/ngx-calendar-view-demo",
+            "index": "src/index.html",
+            "polyfills": [
+              "zone.js"
             ]
           },
           "configurations": {
@@ -109,6 +114,9 @@
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",
+          "options": {
+            "project": "projects/ngx-calendar-view/ng-package.json"
+          },
           "configurations": {
             "production": {
               "tsConfig": "projects/ngx-calendar-view/tsconfig.lib.prod.json"
