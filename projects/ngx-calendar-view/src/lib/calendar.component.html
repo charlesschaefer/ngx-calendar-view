@@ -133,6 +133,13 @@
     @switch (currentViewType()) {
       @case ('day') {
         <div class="calendar-header-mobile p-4 border-b border-calendar-border">
+          <!-- Date label row -->
+          <div class="text-center mb-3">
+            <h2 class="text-lg font-semibold text-calendar-text">
+              {{ formatDateForDisplay(currentDate(), CalendarViewType.DAY) }}
+            </h2>
+          </div>
+          <!-- Navigation controls row -->
           <div class="flex items-center justify-between">
             <div class="flex items-center space-x-2">
               <button 
@@ -155,9 +162,6 @@
                 </svg>
               </button>
             </div>
-            <h2 class="text-lg font-semibold text-calendar-text">
-              {{ formatDateForDisplay(currentDate(), CalendarViewType.DAY) }}
-            </h2>
             @if (config().showViewTypeSelector !== false) {
               <div class="view-type-selector flex items-center space-x-1">
                 @for (viewType of viewTypes; track viewType) {
@@ -174,6 +178,13 @@
       }
       @case ('week') {
         <div class="calendar-header-mobile p-4 border-b border-calendar-border">
+          <!-- Date label row -->
+          <div class="text-center mb-3">
+            <h2 class="text-lg font-semibold text-calendar-text">
+              {{ formatDateForDisplay(currentDate(), CalendarViewType.WEEK) }}
+            </h2>
+          </div>
+          <!-- Navigation controls row -->
           <div class="flex items-center justify-between">
             <div class="flex items-center space-x-2">
               <button 
@@ -196,9 +207,6 @@
                 </svg>
               </button>
             </div>
-            <h2 class="text-lg font-semibold text-calendar-text">
-              {{ formatDateForDisplay(currentDate(), CalendarViewType.WEEK) }}
-            </h2>
             @if (config().showViewTypeSelector !== false) {
               <div class="view-type-selector flex items-center space-x-1">
                 @for (viewType of viewTypes; track viewType) {
@@ -215,6 +223,13 @@
       }
       @case ('month') {
         <div class="calendar-header-mobile p-4 border-b border-calendar-border">
+          <!-- Date label row -->
+          <div class="text-center mb-3">
+            <h2 class="text-lg font-semibold text-calendar-text">
+              {{ formatDateForDisplay(currentDate(), CalendarViewType.MONTH) }}
+            </h2>
+          </div>
+          <!-- Navigation controls row -->
           <div class="flex items-center justify-between">
             <div class="flex items-center space-x-2">
               <button 
@@ -237,9 +252,6 @@
                 </svg>
               </button>
             </div>
-            <h2 class="text-lg font-semibold text-calendar-text">
-              {{ formatDateForDisplay(currentDate(), CalendarViewType.MONTH) }}
-            </h2>
             @if (config().showViewTypeSelector !== false) {
               <div class="view-type-selector flex items-center space-x-1">
                 @for (viewType of viewTypes; track viewType) {
