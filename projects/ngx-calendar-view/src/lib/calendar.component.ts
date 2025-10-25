@@ -467,7 +467,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
     // Handle pan gestures for drag-and-drop
     hammer.on('panstart', (event: HammerInput) => {
       const target = event.target as HTMLElement;
-      const eventCard = target.closest('.event-card, .all-day-event-card');
+      const eventCard = target.closest('.ncv-event-card, .ncv-all-day-event-card');
       
       if (eventCard) {
         const eventId = eventCard.getAttribute('data-event-id');
@@ -538,7 +538,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     // Check if element is a day cell (for all-day events or month view)
-    const dayCell = element.closest('.month-day, .all-day-events-day, .all-day-events-container');
+    const dayCell = element.closest('.ncv-month-day, .ncv-all-day-events-day, .ncv-all-day-events-container');
     if (dayCell) {
       const dayElement = dayCell as HTMLElement;
       const dateValue = dayElement.getAttribute('data-date');
@@ -698,7 +698,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getViewTypeButtonClass(viewType: CalendarViewType): string {
     const isActive = this.currentViewType() === viewType;
-    return `view-type-button ${isActive ? 'active' : 'inactive'}`;
+    return `ncv-view-type-button ${isActive ? 'ncv-active' : 'ncv-inactive'}`;
   }
 
   // Check if we're currently viewing today's date in the current view
@@ -724,6 +724,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getTodayButtonClass(): string {
     const isViewingToday = this.isViewingToday();
-    return `today-button ${isViewingToday ? 'viewing-today' : 'not-viewing-today'}`;
+    return `ncv-today-button ${isViewingToday ? 'ncv-viewing-today' : 'ncv-not-viewing-today'}`;
   }
 }

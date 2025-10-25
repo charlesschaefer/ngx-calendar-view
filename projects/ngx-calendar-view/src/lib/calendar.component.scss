@@ -1,4 +1,6 @@
-.calendar-container {
+@use 'tailwind';
+
+.ncv-calendar-container {
   --calendar-primary: #2563eb;
   --calendar-secondary: #64748b;
   --calendar-background: #ffffff;
@@ -8,7 +10,7 @@
   --calendar-text-secondary: #64748b;
 }
 
-.view-type-button {
+.ncv-view-type-button {
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
   font-weight: 500;
@@ -17,7 +19,7 @@
   border: 1px solid;
 }
 
-.view-type-button.active {
+.ncv-view-type-button.ncv-active {
   background-color: var(--calendar-primary);
   color: var(--calendar-background);
   border-color: var(--calendar-primary);
@@ -26,13 +28,13 @@
   box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
 }
 
-.view-type-button.inactive {
+.ncv-view-type-button.ncv-inactive {
   background-color: var(--calendar-background);
   color: var(--calendar-text);
   border-color: var(--calendar-border);
 }
 
-.view-type-button.inactive:hover {
+.ncv-view-type-button.ncv-inactive:hover {
   background-color: var(--calendar-surface);
   border-color: var(--calendar-primary);
   color: var(--calendar-primary);
@@ -41,7 +43,7 @@
 }
 
 // View type selector container
-.view-type-selector {
+.ncv-view-type-selector {
   display: flex;
   align-items: center;
   gap: 0.25rem;
@@ -52,7 +54,7 @@
 }
 
 // Today button styles
-.today-button {
+.ncv-today-button {
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
   font-weight: 500;
@@ -61,7 +63,7 @@
   border: 1px solid;
 }
 
-.today-button.viewing-today {
+.ncv-today-button.ncv-viewing-today {
   background-color: var(--calendar-primary);
   color: var(--calendar-background);
   border-color: var(--calendar-primary);
@@ -70,17 +72,17 @@
   box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
 }
 
-.today-button.viewing-today:hover {
+.ncv-today-button.ncv-viewing-today:hover {
   opacity: 0.9;
 }
 
-.today-button.not-viewing-today {
+.ncv-today-button.ncv-not-viewing-today {
   background-color: #f3f4f6;
   color: #6b7280;
   border-color: #d1d5db;
 }
 
-.today-button.not-viewing-today:hover {
+.ncv-today-button.ncv-not-viewing-today:hover {
   background-color: #e5e7eb;
   color: #374151;
   border-color: #9ca3af;
@@ -89,7 +91,7 @@
 }
 
 // Event card styles with proper positioning
-.event-card {
+.ncv-event-card {
   transition: all 0.2s ease-in-out;
   position: absolute;
   z-index: 10;
@@ -101,7 +103,7 @@
   }
   
   // Drag states
-  &.dragging {
+  &.ncv-dragging {
     opacity: 0.7;
     transform: scale(1.05);
     z-index: 1000;
@@ -109,20 +111,20 @@
     cursor: grabbing;
   }
   
-  &.drag-over {
+  &.ncv-drag-over {
     background-color: rgba(59, 130, 246, 0.1) !important;
     border-color: #3b82f6 !important;
   }
 }
 
 // Time slot styles for better event positioning
-.time-slot {
+.ncv-time-slot {
   min-height: 2rem;
   position: relative;
   overflow: visible; // Allow events to extend beyond slot boundaries
   transition: all 0.2s ease;
   
-  &.drop-zone-active {
+  &.ncv-drop-zone-active {
     background-color: rgba(59, 130, 246, 0.1);
     border-color: #3b82f6;
     box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.3);
@@ -137,7 +139,7 @@
   }
 
   
-  &.drag-hover-active {
+  &.ncv-drag-hover-active {
     background-color: rgba(59, 130, 246, 0.1);
     border-color: #3b82f6;
     box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.3);
@@ -145,43 +147,43 @@
 }
 
 // Ensure time slots container allows overflow
-.time-slots {
+.ncv-time-slots {
   position: relative;
   overflow: visible;
 }
 
 // Calendar views container
-.calendar-day-view,
-.calendar-week-view {
+.ncv-calendar-day-view,
+.ncv-calendar-week-view {
   overflow: visible;
 }
 
 // Day column in week view
-.day-column {
+.ncv-day-column {
   overflow: visible;
 }
 
 // All-day events styles
-.all-day-events-section {
+.ncv-all-day-events-section {
   margin-bottom: 1rem;
 }
 
-.all-day-header {
+.ncv-all-day-header {
   font-weight: 500;
 }
 
-.all-day-events-container {
+.ncv-all-day-events-container {
   min-height: 2rem;
   transition: all 0.2s ease;
   
-  &.drop-zone-active {
+  &.ncv-drop-zone-active {
     background-color: rgba(59, 130, 246, 0.1);
     border-color: #3b82f6;
     box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.3);
   }
 }
 
-.all-day-event-card {
+.ncv-all-day-event-card {
   transition: all 0.2s ease-in-out;
   
   &:hover {
@@ -190,24 +192,24 @@
   }
 }
 
-.all-day-row {
+.ncv-all-day-row {
   min-height: 2rem;
 }
 
-.all-day-events-day {
+.ncv-all-day-events-day {
   min-height: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   transition: all 0.2s ease;
   
-  &.drop-zone-active {
+  &.ncv-drop-zone-active {
     background-color: rgba(59, 130, 246, 0.1);
     border-color: #3b82f6;
     box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.3);
   }
   
-  .all-day-event-card {
+  .ncv-all-day-event-card {
     margin-bottom: 0.25rem;
     flex-shrink: 0; // Prevent shrinking
     
@@ -217,7 +219,7 @@
   }
   
   // Empty state styling
-  > div:not(.all-day-event-card) {
+  > div:not(.ncv-all-day-event-card) {
     display: flex;
     align-items: center;
     min-height: 1.5rem;
@@ -225,17 +227,17 @@
 }
 
 // Month day styles for event display
-.month-day {
+.ncv-month-day {
   min-height: 6rem;
   transition: all 0.2s ease;
   
-  &.drop-zone-active {
+  &.ncv-drop-zone-active {
     background-color: rgba(59, 130, 246, 0.1);
     border-color: #3b82f6;
     box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.3);
   }
   
-  .event-card {
+  .ncv-event-card {
     margin-bottom: 0.125rem; // space-y-0.5 equivalent
     position: relative; // Override absolute positioning for month view
     display: block;
@@ -248,7 +250,7 @@
 }
 
 // Event popover styles
-.event-popover {
+.ncv-event-popover {
   animation: fadeIn 0.2s ease-in-out;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   
@@ -287,12 +289,12 @@
 }
 
 // Drag preview styles
-.drag-preview {
+.ncv-drag-preview {
   transform: translate(-50%, -50%);
   opacity: 0.9;
   transition: none; // Disable transitions for smooth following
   
-  .event-card {
+  .ncv-event-card {
     min-width: 200px;
     max-width: 300px;
     transform: rotate(2deg); // Slight rotation for visual effect
@@ -302,11 +304,11 @@
 }
 
 // Mobile event overlay styles
-.mobile-event-overlay {
+.ncv-mobile-event-overlay {
   animation: fadeInOverlay 0.3s ease-out;
   backdrop-filter: blur(2px);
   
-  .mobile-event-details {
+  .ncv-mobile-event-details {
     animation: slideInUp 0.3s ease-out;
     max-height: 90vh;
     overflow-y: auto;
@@ -349,13 +351,13 @@
 }
 
 // Ensure mobile overlay appears above everything
-.mobile-event-overlay {
+.ncv-mobile-event-overlay {
   z-index: 9999 !important;
 }
 
 // Mobile header responsive adjustments
 @media (max-width: 768px) {
-  .calendar-header-mobile {
+  .ncv-calendar-header-mobile {
     // Ensure proper touch targets for mobile
     button {
       min-height: 44px; // iOS recommended touch target size
@@ -364,15 +366,15 @@
     }
     
     // Adjust spacing for mobile
-    .flex.items-center.space-x-2 {
+    .ncv-flex.ncv-items-center.ncv-space-x-2 {
       gap: 0.5rem; // Reduce spacing on mobile
     }
     
     // Make view type selector more compact on mobile
-    .view-type-selector {
+    .ncv-view-type-selector {
       gap: 0.125rem; // Reduce gap between view type buttons
       
-      .view-type-button {
+      .ncv-view-type-button {
         padding: 0.375rem 0.5rem; // Smaller padding for mobile
         font-size: 0.75rem; // Smaller font size
       }
@@ -386,28 +388,28 @@
     }
     
     // Ensure Today button is touch-friendly
-    .today-button {
+    .ncv-today-button {
       padding: 0.5rem 0.75rem; // Adequate touch target
       font-size: 0.875rem;
     }
     
     // Adjust spacing between rows
-    .text-center.mb-3 {
+    .ncv-text-center.ncv-mb-3 {
       margin-bottom: 0.75rem; // Consistent spacing between date and controls
     }
     
     // Ensure proper alignment for the two-row layout
-    .flex.items-center.justify-between {
+    .ncv-flex.ncv-items-center.ncv-justify-between {
       align-items: center;
       min-height: 44px; // Ensure minimum height for touch targets
     }
   }
   
   // Mobile overlay adjustments
-  .mobile-event-overlay {
+  .ncv-mobile-event-overlay {
     padding: 1rem;
     
-    .mobile-event-details {
+    .ncv-mobile-event-details {
       margin: 0;
       max-width: none;
       width: 100%;
@@ -417,11 +419,11 @@
 
 // Extra small screens (phones in portrait)
 @media (max-width: 480px) {
-  .calendar-header-mobile {
+  .ncv-calendar-header-mobile {
     padding: 0.75rem; // Reduce padding on very small screens
     
     // Make navigation buttons smaller but still touchable
-    .flex.items-center.space-x-2 {
+    .ncv-flex.ncv-items-center.ncv-space-x-2 {
       gap: 0.25rem;
       
       button {
@@ -437,21 +439,21 @@
     }
     
     // Make view type selector even more compact
-    .view-type-selector {
-      .view-type-button {
+    .ncv-view-type-selector {
+      .ncv-view-type-button {
         padding: 0.25rem 0.375rem;
         font-size: 0.6875rem; // 11px
       }
     }
     
     // Adjust Today button for small screens
-    .today-button {
+    .ncv-today-button {
       padding: 0.375rem 0.5rem;
       font-size: 0.75rem;
     }
     
     // Reduce spacing between rows on very small screens
-    .text-center.mb-3 {
+    .ncv-text-center.ncv-mb-3 {
       margin-bottom: 0.5rem;
     }
   }

@@ -1,15 +1,15 @@
-<div class="calendar-container bg-calendar-background border border-calendar-border rounded-lg shadow-sm">
+<div class="ncv-calendar-container ncv-bg-calendar-background ncv-border ncv-border-calendar-border ncv-rounded-lg ncv-shadow-sm">
   <!-- Desktop Header -->
-  <div class="hidden md:block">
+  <div class="ncv-hidden ncv-md:block">
     @switch (currentViewType()) {
       @case ('day') {
-        <div class="calendar-header-desktop p-4 border-b border-calendar-border">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-4">
+        <div class="ncv-calendar-header-desktop ncv-p-4 ncv-border-b ncv-border-calendar-border">
+          <div class="ncv-flex ncv-items-center ncv-justify-between">
+            <div class="ncv-flex ncv-items-center ncv-space-x-4">
               <button 
                 (click)="navigatePrevious()"
-                class="p-2 hover:bg-calendar-surface rounded-md transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
+                <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
               </button>
@@ -20,17 +20,17 @@
               </button>
               <button 
                 (click)="navigateNext()"
-                class="p-2 hover:bg-calendar-surface rounded-md transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
+                <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
               </button>
             </div>
-            <h2 class="text-lg font-semibold text-calendar-text">
+            <h2 class="ncv-text-lg ncv-font-semibold ncv-text-calendar-text">
               {{ formatDateForDisplay(currentDate(), CalendarViewType.DAY) }}
             </h2>
             @if (config().showViewTypeSelector !== false) {
-              <div class="view-type-selector flex items-center space-x-2">
+              <div class="ncv-view-type-selector ncv-flex ncv-items-center ncv-space-x-2">
                 @for (viewType of viewTypes; track viewType) {
                   <button 
                     (click)="setViewType(viewType)"
@@ -44,13 +44,13 @@
         </div>
       }
       @case ('week') {
-        <div class="calendar-header-desktop p-4 border-b border-calendar-border">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-4">
+        <div class="ncv-calendar-header-desktop ncv-p-4 ncv-border-b ncv-border-calendar-border">
+          <div class="ncv-flex ncv-items-center ncv-justify-between">
+            <div class="ncv-flex ncv-items-center ncv-space-x-4">
               <button 
                 (click)="navigatePrevious()"
-                class="p-2 hover:bg-calendar-surface rounded-md transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
+                <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
               </button>
@@ -61,17 +61,17 @@
               </button>
               <button 
                 (click)="navigateNext()"
-                class="p-2 hover:bg-calendar-surface rounded-md transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
+                <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
               </button>
             </div>
-            <h2 class="text-lg font-semibold text-calendar-text">
+            <h2 class="ncv-text-lg ncv-font-semibold ncv-text-calendar-text">
               {{ formatDateForDisplay(currentDate(), CalendarViewType.WEEK) }}
             </h2>
             @if (config().showViewTypeSelector !== false) {
-              <div class="view-type-selector flex items-center space-x-2">
+              <div class="ncv-view-type-selector ncv-flex ncv-items-center ncv-space-x-2">
                 @for (viewType of viewTypes; track viewType) {
                   <button 
                     (click)="setViewType(viewType)"
@@ -85,13 +85,13 @@
         </div>
       }
       @case ('month') {
-        <div class="calendar-header-desktop p-4 border-b border-calendar-border">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-4">
+        <div class="ncv-calendar-header-desktop ncv-p-4 ncv-border-b ncv-border-calendar-border">
+          <div class="ncv-flex ncv-items-center ncv-justify-between">
+            <div class="ncv-flex ncv-items-center ncv-space-x-4">
               <button 
                 (click)="navigatePrevious()"
-                class="p-2 hover:bg-calendar-surface rounded-md transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
+                <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
               </button>
@@ -102,17 +102,17 @@
               </button>
               <button 
                 (click)="navigateNext()"
-                class="p-2 hover:bg-calendar-surface rounded-md transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
+                <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
               </button>
             </div>
-            <h2 class="text-lg font-semibold text-calendar-text">
+            <h2 class="ncv-text-lg ncv-font-semibold ncv-text-calendar-text">
               {{ formatDateForDisplay(currentDate(), CalendarViewType.MONTH) }}
             </h2>
             @if (config().showViewTypeSelector !== false) {
-              <div class="view-type-selector flex items-center space-x-2">
+              <div class="ncv-view-type-selector ncv-flex ncv-items-center ncv-space-x-2">
                 @for (viewType of viewTypes; track viewType) {
                   <button 
                     (click)="setViewType(viewType)"
@@ -129,23 +129,23 @@
   </div>
 
   <!-- Mobile Header -->
-  <div class="block md:hidden">
+  <div class="ncv-block ncv-md:hidden">
     @switch (currentViewType()) {
       @case ('day') {
-        <div class="calendar-header-mobile p-4 border-b border-calendar-border">
+        <div class="ncv-calendar-header-mobile ncv-p-4 ncv-border-b ncv-border-calendar-border">
           <!-- Date label row -->
-          <div class="text-center mb-3">
-            <h2 class="text-lg font-semibold text-calendar-text">
+          <div class="ncv-text-center ncv-mb-3">
+            <h2 class="ncv-text-lg ncv-font-semibold ncv-text-calendar-text">
               {{ formatDateForDisplay(currentDate(), CalendarViewType.DAY) }}
             </h2>
           </div>
           <!-- Navigation controls row -->
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-2">
+          <div class="ncv-flex ncv-items-center ncv-justify-between">
+            <div class="ncv-flex ncv-items-center ncv-space-x-2">
               <button 
                 (click)="navigatePrevious()"
-                class="p-2 hover:bg-calendar-surface rounded-md transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
+                <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
               </button>
@@ -156,14 +156,14 @@
               </button>
               <button 
                 (click)="navigateNext()"
-                class="p-2 hover:bg-calendar-surface rounded-md transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
+                <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
               </button>
             </div>
             @if (config().showViewTypeSelector !== false) {
-              <div class="view-type-selector flex items-center space-x-1">
+              <div class="ncv-view-type-selector ncv-flex ncv-items-center ncv-space-x-1">
                 @for (viewType of viewTypes; track viewType) {
                   <button 
                     (click)="setViewType(viewType)"
@@ -177,20 +177,20 @@
         </div>
       }
       @case ('week') {
-        <div class="calendar-header-mobile p-4 border-b border-calendar-border">
+        <div class="ncv-calendar-header-mobile ncv-p-4 ncv-border-b ncv-border-calendar-border">
           <!-- Date label row -->
-          <div class="text-center mb-3">
-            <h2 class="text-lg font-semibold text-calendar-text">
+          <div class="ncv-text-center ncv-mb-3">
+            <h2 class="ncv-text-lg ncv-font-semibold ncv-text-calendar-text">
               {{ formatDateForDisplay(currentDate(), CalendarViewType.WEEK) }}
             </h2>
           </div>
           <!-- Navigation controls row -->
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-2">
+          <div class="ncv-flex ncv-items-center ncv-justify-between">
+            <div class="ncv-flex ncv-items-center ncv-space-x-2">
               <button 
                 (click)="navigatePrevious()"
-                class="p-2 hover:bg-calendar-surface rounded-md transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
+                <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
               </button>
@@ -201,14 +201,14 @@
               </button>
               <button 
                 (click)="navigateNext()"
-                class="p-2 hover:bg-calendar-surface rounded-md transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
+                <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
               </button>
             </div>
             @if (config().showViewTypeSelector !== false) {
-              <div class="view-type-selector flex items-center space-x-1">
+              <div class="ncv-view-type-selector ncv-flex ncv-items-center ncv-space-x-1">
                 @for (viewType of viewTypes; track viewType) {
                   <button 
                     (click)="setViewType(viewType)"
@@ -222,20 +222,20 @@
         </div>
       }
       @case ('month') {
-        <div class="calendar-header-mobile p-4 border-b border-calendar-border">
+        <div class="ncv-calendar-header-mobile ncv-p-4 ncv-border-b ncv-border-calendar-border">
           <!-- Date label row -->
-          <div class="text-center mb-3">
-            <h2 class="text-lg font-semibold text-calendar-text">
+          <div class="ncv-text-center ncv-mb-3">
+            <h2 class="ncv-text-lg ncv-font-semibold ncv-text-calendar-text">
               {{ formatDateForDisplay(currentDate(), CalendarViewType.MONTH) }}
             </h2>
           </div>
           <!-- Navigation controls row -->
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-2">
+          <div class="ncv-flex ncv-items-center ncv-justify-between">
+            <div class="ncv-flex ncv-items-center ncv-space-x-2">
               <button 
                 (click)="navigatePrevious()"
-                class="p-2 hover:bg-calendar-surface rounded-md transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
+                <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
               </button>
@@ -246,14 +246,14 @@
               </button>
               <button 
                 (click)="navigateNext()"
-                class="p-2 hover:bg-calendar-surface rounded-md transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
+                <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
               </button>
             </div>
             @if (config().showViewTypeSelector !== false) {
-              <div class="view-type-selector flex items-center space-x-1">
+              <div class="ncv-view-type-selector ncv-flex ncv-items-center ncv-space-x-1">
                 @for (viewType of viewTypes; track viewType) {
                   <button 
                     (click)="setViewType(viewType)"
@@ -270,29 +270,29 @@
   </div>
 
   <!-- Calendar Views -->
-  <div class="calendar-content">
+  <div class="ncv-calendar-content">
     @switch (currentViewType()) {
       @case ('day') {
-        <div class="calendar-day-view p-4">
-          <div class="grid grid-cols-1 gap-4">
+        <div class="ncv-calendar-day-view ncv-p-4">
+          <div class="ncv-grid ncv-grid-cols-1 ncv-gap-4">
             <!-- All-day events section -->
             @if (getAllDayEvents(currentDate()).length > 0) {
-              <div class="all-day-events-section">
-                <div class="all-day-header bg-calendar-surface p-2 rounded-md mb-2">
-                  <div class="text-sm font-medium text-calendar-text-secondary">All Day</div>
+              <div class="ncv-all-day-events-section">
+                <div class="ncv-all-day-header ncv-bg-calendar-surface ncv-p-2 ncv-rounded-md ncv-mb-2">
+                  <div class="ncv-text-sm ncv-font-medium ncv-text-calendar-text-secondary">All Day</div>
                 </div>
                 <div 
-                  class="all-day-events-container"
-                  [class.drop-zone-active]="dragState().isDragging && dragState().dropTarget?.date?.toISODate() === currentDate().toISODate() && !dragState().dropTarget?.time"
+                  class="ncv-all-day-events-container"
+                  [class.ncv-drop-zone-active]="dragState().isDragging && dragState().dropTarget?.date?.toISODate() === currentDate().toISODate() && !dragState().dropTarget?.time"
                   [attr.data-date]="currentDate().toISODate()">
                   @for (event of getAllDayEvents(currentDate()); track event.id) {
                     
                     <div 
-                      class="all-day-event-card p-2 rounded text-xs cursor-pointer shadow-sm border-l-2 mb-1"
+                      class="ncv-all-day-event-card ncv-p-2 ncv-rounded ncv-text-xs ncv-cursor-pointer ncv-shadow-sm ncv-border-l-2 ncv-mb-1"
                       [style.background-color]="getEventProjectColor(event)"
                       [style.border-left-color]="getEventProjectColor(event)"
-                      [class.dragging]="dragState().isDragging && dragState().draggedEvent?.id === event.id"
-                      [class.drag-over]="dragState().dropTarget?.date?.toISODate() === currentDate().toISODate() && !dragState().dropTarget?.time"
+                      [class.ncv-dragging]="dragState().isDragging && dragState().draggedEvent?.id === event.id"
+                      [class.ncv-drag-over]="dragState().dropTarget?.date?.toISODate() === currentDate().toISODate() && !dragState().dropTarget?.time"
                       [attr.data-event-id]="event.id"
                       (mouseenter)="showPopover(event, $event)"
                       (mouseleave)="hidePopover()"
@@ -300,9 +300,9 @@
                       (keydown)="onEventClick(event); $event.stopPropagation()"
                       tabindex="0">
                     
-                      <div class="font-medium text-gray-800">{{ event.title }}</div>
+                      <div class="ncv-font-medium ncv-text-gray-800">{{ event.title }}</div>
                       @if (event.description) {
-                        <div class="text-gray-600 text-xs mt-1">{{ event.description }}</div>
+                        <div class="ncv-text-gray-600 ncv-text-xs ncv-mt-1">{{ event.description }}</div>
                       }
                     </div>
                   }
@@ -310,36 +310,36 @@
               </div>
             }
             
-            <div class="time-slot-header bg-calendar-surface p-2 rounded-md">
-              <div class="text-sm font-medium text-calendar-text-secondary p-2">Time</div>
+            <div class="ncv-time-slot-header ncv-bg-calendar-surface ncv-p-2 ncv-rounded-md">
+              <div class="ncv-text-sm ncv-font-medium ncv-text-calendar-text-secondary ncv-p-2">Time</div>
             </div>
-            <div class="time-slots">
+            <div class="ncv-time-slots">
               @for (slot of timeSlots(); track slot.time.toMillis()) {
                 <div 
-                  class="time-slot min-h-slot border-b border-calendar-border p-2 hover:bg-calendar-surface cursor-pointer relative"
-                  [class.drop-zone-active]="dragState().isDragging && dragState().dropTarget?.date?.toISODate() === currentDate().toISODate() && dragState().dropTarget?.time?.toISODate() === slot.time.toISODate()"
-                  [class.drag-hover-active]="dragState().isDragging && isHoveringTimeSlot(slot.time, currentDate())"
+                  class="ncv-time-slot ncv-min-h-slot ncv-border-b ncv-border-calendar-border ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-cursor-pointer ncv-relative"
+                  [class.ncv-drop-zone-active]="dragState().isDragging && dragState().dropTarget?.date?.toISODate() === currentDate().toISODate() && dragState().dropTarget?.time?.toISODate() === slot.time.toISODate()"
+                  [class.ncv-drag-hover-active]="dragState().isDragging && isHoveringTimeSlot(slot.time, currentDate())"
                   [attr.data-time]="slot.time.toISO()"
                   [attr.data-date]="currentDate().toISODate()"
                   (click)="onTimeSlotClick(slot.time)"
                   (keydown)="onTimeSlotClick(slot.time)"
                   tabindex="0">
-                  <div class="text-xs text-calendar-text-secondary absolute left-2 top-2 z-10">{{ slot.label }}</div>
+                  <div class="ncv-text-xs ncv-text-calendar-text-secondary ncv-absolute ncv-left-2 ncv-top-2 ncv-z-10">{{ slot.label }}</div>
                   <!-- Events for this time slot -->
                   @for (stackedEvent of getStackedEventsForSlot(getEventsForTimeSlot(slot.time)); track stackedEvent.event.id) {
                     @let position = getEventPositionInSlot(stackedEvent.event, slot.time);
                     @let slotDuration = config().timeSlotDuration || 30;
                       
                       <div 
-                        class="event-card rounded text-xs cursor-pointer shadow-sm border-l-2"
+                        class="ncv-event-card ncv-rounded ncv-text-xs ncv-cursor-pointer ncv-shadow-sm ncv-border-l-2"
                         [style.background-color]="getEventProjectColor(stackedEvent.event)"
                         [style.border-left-color]="getEventProjectColor(stackedEvent.event)"
                         [style.top.rem]="position.top"
                         [style.height.rem]="position.height"
                         [style.left.rem]="stackedEvent.left"
                         [style.width.%]="stackedEvent.width"
-                        [class.dragging]="dragState().isDragging && dragState().draggedEvent?.id === stackedEvent.event.id"
-                        [class.drag-over]="dragState().dropTarget?.date?.toISODate() === currentDate().toISODate() && dragState().dropTarget?.time?.toISODate() === slot.time.toISODate()"
+                        [class.ncv-dragging]="dragState().isDragging && dragState().draggedEvent?.id === stackedEvent.event.id"
+                        [class.ncv-drag-over]="dragState().dropTarget?.date?.toISODate() === currentDate().toISODate() && dragState().dropTarget?.time?.toISODate() === slot.time.toISODate()"
                         [attr.data-event-id]="stackedEvent.event.id"
                         (mouseenter)="showPopover(stackedEvent.event, $event)"
                         (mouseleave)="hidePopover()"
@@ -347,9 +347,9 @@
                         (keydown)="onEventClick(stackedEvent.event); $event.stopPropagation()"
                         tabindex="0">
                         
-                      <div class="font-medium text-gray-800 truncate p-1">{{ stackedEvent.event.title }}</div>
+                      <div class="ncv-font-medium ncv-text-gray-800 ncv-truncate ncv-p-1">{{ stackedEvent.event.title }}</div>
                       @if (stackedEvent.event.description && shouldShowDescription(stackedEvent.event, slotDuration)) {
-                        <div class="text-gray-600 truncate px-1 pb-1">{{ stackedEvent.event.description }}</div>
+                        <div class="ncv-text-gray-600 ncv-truncate ncv-px-1 ncv-pb-1">{{ stackedEvent.event.description }}</div>
                       }
                     </div>
                   }
@@ -360,40 +360,40 @@
         </div>
       }
       @case ('week') {
-        <div class="calendar-week-view p-4">
-          <div class="grid grid-cols-8 gap-1">
+        <div class="ncv-calendar-week-view ncv-p-4">
+          <div class="ncv-grid ncv-grid-cols-8 ncv-gap-1">
             <!-- Time column -->
-            <div class="time-column">
-              <div class="time-slot-header bg-calendar-surface p-2 rounded-md mb-1">
-                <div class="text-sm font-medium text-calendar-text-secondary p-2">Time</div>
+            <div class="ncv-time-column">
+              <div class="ncv-time-slot-header ncv-bg-calendar-surface ncv-p-2 ncv-rounded-md ncv-mb-1">
+                <div class="ncv-text-sm ncv-font-medium ncv-text-calendar-text-secondary ncv-p-2">Time</div>
               </div>
               <!-- All-day events row -->
               @if (hasAllDayEventsInWeek()) {
                 <div 
-                  class="all-day-row min-h-slot border-b border-calendar-border p-1"
+                  class="ncv-all-day-row ncv-min-h-slot ncv-border-b ncv-border-calendar-border ncv-p-1"
                   [style.height]="getAllDayRowHeight()">
-                  <div class="text-xs text-calendar-text-secondary">All Day</div>
+                  <div class="ncv-text-xs ncv-text-calendar-text-secondary">All Day</div>
                 </div>
               }
               @for (slot of timeSlots(); track slot.time.toMillis()) {
-                <div class="time-slot min-h-slot border-b border-calendar-border p-1">
-                  <div class="text-xs text-calendar-text-secondary">{{ slot.label }}</div>
+                <div class="ncv-time-slot ncv-min-h-slot ncv-border-b ncv-border-calendar-border ncv-p-1">
+                  <div class="ncv-text-xs ncv-text-calendar-text-secondary">{{ slot.label }}</div>
                 </div>
               }
             </div>
             <!-- Day columns -->
             @for (day of weekDays(); track day.toISODate()) {
-              <div class="day-column">
-                <div class="day-header bg-calendar-surface p-2 rounded-md mb-1 text-center">
-                  <div class="text-sm font-medium text-calendar-text">{{ day.toFormat('EEE') }}</div>
-                  <div class="text-xs text-calendar-text-secondary">{{ day.toFormat('d') }}</div>
+              <div class="ncv-day-column">
+                <div class="ncv-day-header ncv-bg-calendar-surface ncv-p-2 ncv-rounded-md ncv-mb-1 ncv-text-center">
+                  <div class="ncv-text-sm ncv-font-medium ncv-text-calendar-text">{{ day.toFormat('EEE') }}</div>
+                  <div class="ncv-text-xs ncv-text-calendar-text-secondary">{{ day.toFormat('d') }}</div>
                 </div>
                 <!-- All-day events for this day -->
                 @if (hasAllDayEventsInWeek()) {
                   <div 
-                    class="all-day-events-day border-b border-calendar-border p-1 hover:bg-calendar-surface cursor-pointer"
+                    class="ncv-all-day-events-day ncv-border-b ncv-border-calendar-border ncv-p-1 ncv-hover:ncv-bg-calendar-surface ncv-cursor-pointer"
                     [style.height]="getAllDayRowHeight()"
-                    [class.drop-zone-active]="dragState().isDragging && dragState().dropTarget?.date?.toISODate() === day.toISODate() && !dragState().dropTarget?.time"
+                    [class.ncv-drop-zone-active]="dragState().isDragging && dragState().dropTarget?.date?.toISODate() === day.toISODate() && !dragState().dropTarget?.time"
                     [attr.data-date]="day.toISODate()"
                     (click)="onDayClick(day)"
                     (keydown)="onDayClick(day)"
@@ -402,11 +402,11 @@
                       @for (event of getAllDayEvents(day); track event.id) {
                         
                         <div 
-                          class="all-day-event-card p-1 rounded text-xs cursor-pointer shadow-sm border-l-2 mb-1"
+                          class="ncv-all-day-event-card ncv-p-1 ncv-rounded ncv-text-xs ncv-cursor-pointer ncv-shadow-sm ncv-border-l-2 ncv-mb-1"
                           [style.background-color]="getEventProjectColor(event)"
                           [style.border-left-color]="getEventProjectColor(event)"
-                          [class.dragging]="dragState().isDragging && dragState().draggedEvent?.id === event.id"
-                          [class.drag-over]="dragState().dropTarget?.date?.toISODate() === day.toISODate() && !dragState().dropTarget?.time"
+                          [class.ncv-dragging]="dragState().isDragging && dragState().draggedEvent?.id === event.id"
+                          [class.ncv-drag-over]="dragState().dropTarget?.date?.toISODate() === day.toISODate() && !dragState().dropTarget?.time"
                           [attr.data-event-id]="event.id"
                           (mouseenter)="showPopover(event, $event)"
                           (mouseleave)="hidePopover()"
@@ -414,21 +414,21 @@
                           (keydown)="onEventClick(event); $event.stopPropagation()"
                           tabindex="0">
                         
-                          <div class="font-medium text-gray-800 truncate">{{ event.title }}</div>
+                          <div class="ncv-font-medium ncv-text-gray-800 ncv-truncate">{{ event.title }}</div>
                         </div>
                       }
                     } @else {
                       <!-- Empty all-day row for days without all-day events -->
-                      <div class="text-xs text-calendar-text-secondary opacity-50 py-1">
+                      <div class="ncv-text-xs ncv-text-calendar-text-secondary ncv-opacity-50 ncv-py-1">
                       </div>
                     }
                   </div>
                 }
                 @for (slot of timeSlots(); track slot.time.toMillis()) {
                   <div 
-                    class="time-slot min-h-slot border-b border-calendar-border hover:bg-calendar-surface cursor-pointer relative"
-                    [class.drop-zone-active]="dragState().isDragging && dragState().dropTarget?.date?.toISODate() === day.toISODate() && dragState().dropTarget?.time?.toISODate() === slot.time.toISODate()"
-                    [class.drag-hover-active]="dragState().isDragging && isHoveringTimeSlot(slot.time, day)"
+                    class="ncv-time-slot ncv-min-h-slot ncv-border-b ncv-border-calendar-border ncv-hover:ncv-bg-calendar-surface ncv-cursor-pointer ncv-relative"
+                    [class.ncv-drop-zone-active]="dragState().isDragging && dragState().dropTarget?.date?.toISODate() === day.toISODate() && dragState().dropTarget?.time?.toISODate() === slot.time.toISODate()"
+                    [class.ncv-drag-hover-active]="dragState().isDragging && isHoveringTimeSlot(slot.time, day)"
                     [attr.data-time]="slot.time.toISO()"
                     [attr.data-date]="day.toISODate()"
                     (click)="onTimeSlotClick(slot.time, day)"
@@ -440,15 +440,15 @@
                       @let slotDuration = config().timeSlotDuration || 30;
                       
                       <div 
-                        class="event-card rounded text-xs cursor-pointer shadow-sm border-l-2"
+                        class="ncv-event-card ncv-rounded ncv-text-xs ncv-cursor-pointer ncv-shadow-sm ncv-border-l-2"
                         [style.background-color]="getEventProjectColor(stackedEvent.event)"
                         [style.border-left-color]="getEventProjectColor(stackedEvent.event)"
                         [style.top.rem]="position.top"
                         [style.height.rem]="position.height"
                         [style.left.%]="stackedEvent.left"
                         [style.width.%]="stackedEvent.width"
-                        [class.dragging]="dragState().isDragging && dragState().draggedEvent?.id === stackedEvent.event.id"
-                        [class.drag-over]="dragState().dropTarget?.date?.toISODate() === day.toISODate() && dragState().dropTarget?.time?.toISODate() === slot.time.toISODate()"
+                        [class.ncv-dragging]="dragState().isDragging && dragState().draggedEvent?.id === stackedEvent.event.id"
+                        [class.ncv-drag-over]="dragState().dropTarget?.date?.toISODate() === day.toISODate() && dragState().dropTarget?.time?.toISODate() === slot.time.toISODate()"
                         [attr.data-event-id]="stackedEvent.event.id"
                         (mouseenter)="showPopover(stackedEvent.event, $event)"
                         (mouseleave)="hidePopover()"
@@ -456,9 +456,9 @@
                         (keydown)="onEventClick(stackedEvent.event); $event.stopPropagation()"
                         tabindex="0">
                       
-                        <div class="font-medium text-gray-800 truncate p-1">{{ stackedEvent.event.title }}</div>
+                        <div class="ncv-font-medium ncv-text-gray-800 ncv-truncate ncv-p-1">{{ stackedEvent.event.title }}</div>
                         @if (stackedEvent.event.description && shouldShowDescription(stackedEvent.event, slotDuration)) {
-                          <div class="text-gray-600 truncate px-1 pb-1">{{ stackedEvent.event.description }}</div>
+                          <div class="ncv-text-gray-600 ncv-truncate ncv-px-1 ncv-pb-1">{{ stackedEvent.event.description }}</div>
                         }
                       </div>
                     }
@@ -470,53 +470,53 @@
         </div>
       }
       @case ('month') {
-        <div class="calendar-month-view p-4">
-          <div class="grid grid-cols-7 gap-1">
+        <div class="ncv-calendar-month-view ncv-p-4">
+          <div class="ncv-grid ncv-grid-cols-7 ncv-gap-1">
             <!-- Day headers -->
             @for (dayName of dayNames; track dayName) {
-              <div class="day-header bg-calendar-surface p-2 rounded-md text-center">
-                <div class="text-sm font-medium text-calendar-text-secondary">{{ dayName }}</div>
+              <div class="ncv-day-header ncv-bg-calendar-surface ncv-p-2 ncv-rounded-md ncv-text-center">
+                <div class="ncv-text-sm ncv-font-medium ncv-text-calendar-text-secondary">{{ dayName }}</div>
               </div>
             }
             <!-- Month days -->
             @for (day of monthDays(); track day.toISODate()) {
               <div 
-                class="month-day min-h-24 border border-calendar-border p-2 hover:bg-calendar-surface cursor-pointer relative"
-                [class.bg-calendar-surface]="!isCurrentMonth(day, currentDate())"
-                [class.font-semibold]="isToday(day)"
-                [class.drop-zone-active]="dragState().isDragging && dragState().dropTarget?.date?.toISODate() === day.toISODate()"
+                class="ncv-month-day ncv-min-h-24 ncv-border ncv-border-calendar-border ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-cursor-pointer ncv-relative"
+                [class.ncv-bg-calendar-surface]="!isCurrentMonth(day, currentDate())"
+                [class.ncv-font-semibold]="isToday(day)"
+                [class.ncv-drop-zone-active]="dragState().isDragging && dragState().dropTarget?.date?.toISODate() === day.toISODate()"
                 [attr.data-date]="day.toISODate()"
                 (click)="onDayClick(day)"
                 (keydown)="onDayClick(day)"
                 tabindex="0">
-                <div class="text-sm text-calendar-text">{{ day.toFormat('d') }}</div>
+                <div class="ncv-text-sm ncv-text-calendar-text">{{ day.toFormat('d') }}</div>
                 <!-- Events for this day -->
                 @if (getEventsForDay(day).length > 0) {
                   @let dayEvents = getEventsForDay(day);
                   @let visibleEvents = getVisibleEvents(dayEvents, 3);
-                  <div class="mt-1 space-y-0.5">
+                  <div class="ncv-mt-1 ncv-space-y-0.5">
                     @for (event of visibleEvents.visible; track event.id) {
                       
                       <div 
-                        class="event-card p-1 rounded text-xs cursor-pointer shadow-sm border-l-2 truncate block w-full"
+                        class="ncv-event-card ncv-p-1 ncv-rounded ncv-text-xs ncv-cursor-pointer ncv-shadow-sm ncv-border-l-2 ncv-truncate ncv-block ncv-w-full"
                         [style.background-color]="getEventProjectColor(event)"
                         [style.border-left-color]="getEventProjectColor(event)"
-                        [class.dragging]="dragState().isDragging && dragState().draggedEvent?.id === event.id"
-                        [class.drag-over]="dragState().dropTarget?.date?.toISODate() === day.toISODate()"
+                        [class.ncv-dragging]="dragState().isDragging && dragState().draggedEvent?.id === event.id"
+                        [class.ncv-drag-over]="dragState().dropTarget?.date?.toISODate() === day.toISODate()"
                         [attr.data-event-id]="event.id"
                         (click)="onEventClick(event); $event.stopPropagation()"
                         (keydown)="onEventClick(event); $event.stopPropagation()"
                         tabindex="0">
                       
-                        <div class="font-medium text-gray-800 truncate">{{ event.title }}</div>
+                        <div class="ncv-font-medium ncv-text-gray-800 ncv-truncate">{{ event.title }}</div>
                         @if (event.time) {
-                          <div class="text-gray-600 text-xs">{{ event.time.toFormat('HH:mm') }}</div>
+                          <div class="ncv-text-gray-600 ncv-text-xs">{{ event.time.toFormat('HH:mm') }}</div>
                         }
                       </div>
                     }
                     @if (visibleEvents.hidden > 0) {
                       <div 
-                        class="text-xs text-blue-600 hover:text-blue-800 cursor-pointer font-medium mt-1"
+                        class="ncv-text-xs ncv-text-blue-600 ncv-hover:ncv-text-blue-800 ncv-cursor-pointer ncv-font-medium ncv-mt-1"
                         (click)="$event.stopPropagation()"
                         (keydown)="$event.stopPropagation()"
                         tabindex="0">
@@ -536,16 +536,16 @@
   <!-- Drag Preview -->
   @if (dragState().isDragging && dragState().draggedEvent) {
     <div 
-      class="drag-preview fixed pointer-events-none z-50"
+      class="ncv-drag-preview ncv-fixed ncv-pointer-events-none ncv-z-50"
       [style.left.px]="dragState().dragPosition?.x || 0"
       [style.top.px]="dragState().dragPosition?.y || 0">
       <div 
-        class="event-card rounded text-xs shadow-lg border-l-2 p-2"
+        class="ncv-event-card ncv-rounded ncv-text-xs ncv-shadow-lg ncv-border-l-2 ncv-p-2"
         [style.background-color]="getEventProjectColor(dragState().draggedEvent!)"
         [style.border-left-color]="getEventProjectColor(dragState().draggedEvent!)">
-        <div class="font-medium text-gray-800 truncate">{{ dragState().draggedEvent!.title }}</div>
+        <div class="ncv-font-medium ncv-text-gray-800 ncv-truncate">{{ dragState().draggedEvent!.title }}</div>
         @if (dragState().draggedEvent!.description) {
-          <div class="text-gray-600 truncate text-xs mt-1">{{ dragState().draggedEvent!.description }}</div>
+          <div class="ncv-text-gray-600 ncv-truncate ncv-text-xs ncv-mt-1">{{ dragState().draggedEvent!.description }}</div>
         }
       </div>
     </div>
@@ -554,28 +554,28 @@
   <!-- Event Details Popover (Desktop) -->
   @if (shouldShowPopover && popoverEventData) {
     <div 
-      class="event-popover fixed z-50 bg-white border border-gray-200 rounded-lg shadow-lg p-4 max-w-sm"
+      class="ncv-event-popover ncv-fixed ncv-z-50 ncv-bg-white ncv-border ncv-border-gray-200 ncv-rounded-lg ncv-shadow-lg ncv-p-4 ncv-max-w-sm"
       [style.left.px]="popoverPositionData?.x || 0"
       [style.top.px]="(popoverPositionData?.y || 0) - 10">
-      <div class="flex items-start justify-between mb-2">
-        <h3 class="font-semibold text-gray-900 text-sm">{{ popoverEventData.title }}</h3>
+      <div class="ncv-flex ncv-items-start ncv-justify-between ncv-mb-2">
+        <h3 class="ncv-font-semibold ncv-text-gray-900 ncv-text-sm">{{ popoverEventData.title }}</h3>
         <button 
           (click)="hidePopover()"
-          class="text-gray-400 hover:text-gray-600 ml-2">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          class="ncv-text-gray-400 ncv-hover:ncv-text-gray-600 ncv-ml-2">
+          <svg class="ncv-w-4 ncv-h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
         </button>
       </div>
       
       @if (popoverEventData.description) {
-        <p class="text-gray-600 text-sm mb-3">{{ popoverEventData.description }}</p>
+        <p class="ncv-text-gray-600 ncv-text-sm ncv-mb-3">{{ popoverEventData.description }}</p>
       }
       
-      <div class="space-y-1 text-xs text-gray-500">
+      <div class="ncv-space-y-1 ncv-text-xs ncv-text-gray-500">
         @if (popoverEventData.time) {
-          <div class="flex items-center">
-            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="ncv-flex ncv-items-center">
+            <svg class="ncv-w-3 ncv-h-3 ncv-mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
             {{ popoverEventData.time.toFormat('HH:mm') }}
@@ -585,17 +585,17 @@
           </div>
         }
         
-        <div class="flex items-center">
-          <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="ncv-flex ncv-items-center">
+          <svg class="ncv-w-3 ncv-h-3 ncv-mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
           </svg>
           {{ (popoverEventData.time || popoverEventData.date).toFormat('EEEE, MMMM d, yyyy') }}
         </div>
         
         @if (popoverEventData.project) {
-          <div class="flex items-center">
+          <div class="ncv-flex ncv-items-center">
             <div 
-              class="w-3 h-3 rounded-full mr-1"
+              class="ncv-w-3 ncv-h-3 ncv-rounded-full ncv-mr-1"
               [style.background-color]="getEventProjectColor(popoverEventData)">
             </div>
             {{ popoverEventData.project }}
@@ -603,8 +603,8 @@
         }
         
         @if (popoverEventData.duration) {
-          <div class="flex items-center">
-            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="ncv-flex ncv-items-center">
+            <svg class="ncv-w-3 ncv-h-3 ncv-mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
             {{ popoverEventData.duration }} minutes
@@ -617,7 +617,7 @@
   <!-- Mobile Event Details Overlay -->
   @if (shouldShowMobileOverlay && mobileOverlayEventData) {
     <div 
-      class="mobile-event-overlay fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center p-4"
+      class="ncv-mobile-event-overlay ncv-fixed ncv-inset-0 ncv-z-50 ncv-bg-black ncv-bg-opacity-50 ncv-flex ncv-items-center ncv-justify-center ncv-p-4"
       (click)="hideMobileOverlay()"
       (keydown)="hideMobileOverlay()"
       tabindex="0"
@@ -625,50 +625,50 @@
       aria-modal="true"
       aria-labelledby="mobile-event-title">
       <div 
-        class="mobile-event-details bg-white rounded-lg shadow-xl max-w-sm w-full mx-4"
+        class="ncv-mobile-event-details ncv-bg-white ncv-rounded-lg ncv-shadow-xl ncv-max-w-sm ncv-w-full ncv-mx-4"
         (click)="$event.stopPropagation()"
         (keydown)="$event.stopPropagation()"
         tabindex="0">
-        <div class="p-6">
-          <div class="flex items-start justify-between mb-4">
-            <h3 id="mobile-event-title" class="font-semibold text-gray-900 text-lg">{{ mobileOverlayEventData.title }}</h3>
+        <div class="ncv-p-6">
+          <div class="ncv-flex ncv-items-start ncv-justify-between ncv-mb-4">
+            <h3 id="mobile-event-title" class="ncv-font-semibold ncv-text-gray-900 ncv-text-lg">{{ mobileOverlayEventData.title }}</h3>
             <button 
               (click)="hideMobileOverlay()"
-              class="text-gray-400 hover:text-gray-600 ml-2 p-1">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              class="ncv-text-gray-400 ncv-hover:ncv-text-gray-600 ncv-ml-2 ncv-p-1">
+              <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
               </svg>
             </button>
           </div>
           
           @if (mobileOverlayEventData.description) {
-            <p class="text-gray-600 text-sm mb-4">{{ mobileOverlayEventData.description }}</p>
+            <p class="ncv-text-gray-600 ncv-text-sm ncv-mb-4">{{ mobileOverlayEventData.description }}</p>
           }
           
-          <div class="space-y-3 text-sm text-gray-500 mb-6">
+          <div class="ncv-space-y-3 ncv-text-sm ncv-text-gray-500 ncv-mb-6">
             @if (mobileOverlayEventData.time) {
-              <div class="flex items-center">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="ncv-flex ncv-items-center">
+                <svg class="ncv-w-4 ncv-h-4 ncv-mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-                <span class="font-medium">{{ mobileOverlayEventData.time.toFormat('HH:mm') }}</span>
+                <span class="ncv-font-medium">{{ mobileOverlayEventData.time.toFormat('HH:mm') }}</span>
                 @if (mobileOverlayEventData.duration) {
-                  <span class="ml-1">- {{ mobileOverlayEventData.time.plus({ minutes: mobileOverlayEventData.duration }).toFormat('HH:mm') }}</span>
+                  <span class="ncv-ml-1">- {{ mobileOverlayEventData.time.plus({ minutes: mobileOverlayEventData.duration }).toFormat('HH:mm') }}</span>
                 }
               </div>
             }
             
-            <div class="flex items-center">
-              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="ncv-flex ncv-items-center">
+              <svg class="ncv-w-4 ncv-h-4 ncv-mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
               </svg>
               {{ (mobileOverlayEventData.time || mobileOverlayEventData.date).toFormat('EEEE, MMMM d, yyyy') }}
             </div>
             
             @if (mobileOverlayEventData.project) {
-              <div class="flex items-center">
+              <div class="ncv-flex ncv-items-center">
                 <div 
-                  class="w-4 h-4 rounded-full mr-2"
+                  class="ncv-w-4 ncv-h-4 ncv-rounded-full ncv-mr-2"
                   [style.background-color]="getEventProjectColor(mobileOverlayEventData)">
                 </div>
                 {{ mobileOverlayEventData.project }}
@@ -676,8 +676,8 @@
             }
             
             @if (mobileOverlayEventData.duration) {
-              <div class="flex items-center">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="ncv-flex ncv-items-center">
+                <svg class="ncv-w-4 ncv-h-4 ncv-mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
                 {{ mobileOverlayEventData.duration }} minutes
@@ -685,15 +685,15 @@
             }
           </div>
           
-          <div class="flex gap-3">
+          <div class="ncv-flex ncv-gap-3">
             <button 
               (click)="onMobileOverlayEditClick(mobileOverlayEventData)"
-              class="flex-1 bg-blue-600 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-700 transition-colors">
+              class="ncv-flex-1 ncv-bg-blue-600 ncv-text-white ncv-px-4 ncv-py-2 ncv-rounded-md ncv-font-medium ncv-hover:ncv-bg-blue-700 ncv-transition-colors">
               Edit
             </button>
             <button 
               (click)="hideMobileOverlay()"
-              class="flex-1 bg-gray-200 text-gray-800 px-4 py-2 rounded-md font-medium hover:bg-gray-300 transition-colors">
+              class="ncv-flex-1 ncv-bg-gray-200 ncv-text-gray-800 ncv-px-4 ncv-py-2 ncv-rounded-md ncv-font-medium ncv-hover:ncv-bg-gray-300 ncv-transition-colors">
               Close
             </button>
           </div>
