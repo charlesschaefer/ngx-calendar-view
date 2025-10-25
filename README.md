@@ -28,3 +28,20 @@ The demo includes sample events and projects to help you explore the component's
 The UI is styled with Tailwind CSS and demonstrates how ngx-calendar-view can be integrated and customized within your own Angular applications.
 
 
+## Developing
+
+Since this repo has a demo app and the angular library for the component, in order to test the library in the demo app we need to build it first. 
+
+To do this, you'll need to run the following commands when you clone this repo:
+```bash
+npm install
+npx ng build ngx-calendar-view
+ng serve
+```
+
+In order to rebuild the library everytime you make a change and then be able to check the change instantly in the demo app, build the library with `--watch`:
+```bash
+npx ng build ngx-calendar-view --watch
+```
+
+Then, in another terminal, run the `ng serve` command.

@@ -394,8 +394,8 @@
                         [class.dragging]="dragState().isDragging && dragState().draggedEvent?.id === event.id"
                         [class.drag-over]="dragState().dropTarget?.date?.toISODate() === day.toISODate()"
                         [attr.data-event-id]="event.id"
-                        (click)="showPopover(event, $event); onEventClick(event); $event.stopPropagation()"
-                        (keydown)="showPopover(event, $event); onEventClick(event); $event.stopPropagation()"
+                        (click)="onEventClick(event); $event.stopPropagation()"
+                        (keydown)="onEventClick(event); $event.stopPropagation()"
                         tabindex="0">
                       
                         <div class="font-medium text-gray-800 truncate">{{ event.title }}</div>
@@ -441,7 +441,7 @@
     </div>
   }
 
-  <!-- Event Details Popover -->
+  <!-- Event Details Popover (Desktop) -->
   @if (shouldShowPopover && popoverEventData) {
     <div 
       class="event-popover fixed z-50 bg-white border border-gray-200 rounded-lg shadow-lg p-4 max-w-sm"
@@ -500,6 +500,94 @@
             {{ popoverEventData.duration }} minutes
           </div>
         }
+      </div>
+    </div>
+  }
+
+  <!-- Mobile Event Details Overlay -->
+  @if (shouldShowMobileOverlay && mobileOverlayEventData) {
+    <div 
+      class="mobile-event-overlay fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center p-4"
+      (click)="hideMobileOverlay()"
+      (keydown)="hideMobileOverlay()"
+      tabindex="0"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="mobile-event-title">
+      <div 
+        class="mobile-event-details bg-white rounded-lg shadow-xl max-w-sm w-full mx-4"
+        (click)="$event.stopPropagation()"
+        (keydown)="$event.stopPropagation()"
+        tabindex="0">
+        <div class="p-6">
+          <div class="flex items-start justify-between mb-4">
+            <h3 id="mobile-event-title" class="font-semibold text-gray-900 text-lg">{{ mobileOverlayEventData.title }}</h3>
+            <button 
+              (click)="hideMobileOverlay()"
+              class="text-gray-400 hover:text-gray-600 ml-2 p-1">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+          
+          @if (mobileOverlayEventData.description) {
+            <p class="text-gray-600 text-sm mb-4">{{ mobileOverlayEventData.description }}</p>
+          }
+          
+          <div class="space-y-3 text-sm text-gray-500 mb-6">
+            @if (mobileOverlayEventData.time) {
+              <div class="flex items-center">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span class="font-medium">{{ mobileOverlayEventData.time.toFormat('HH:mm') }}</span>
+                @if (mobileOverlayEventData.duration) {
+                  <span class="ml-1">- {{ mobileOverlayEventData.time.plus({ minutes: mobileOverlayEventData.duration }).toFormat('HH:mm') }}</span>
+                }
+              </div>
+            }
+            
+            <div class="flex items-center">
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+              {{ (mobileOverlayEventData.time || mobileOverlayEventData.date).toFormat('EEEE, MMMM d, yyyy') }}
+            </div>
+            
+            @if (mobileOverlayEventData.project) {
+              <div class="flex items-center">
+                <div 
+                  class="w-4 h-4 rounded-full mr-2"
+                  [style.background-color]="getEventProjectColor(mobileOverlayEventData)">
+                </div>
+                {{ mobileOverlayEventData.project }}
+              </div>
+            }
+            
+            @if (mobileOverlayEventData.duration) {
+              <div class="flex items-center">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                {{ mobileOverlayEventData.duration }} minutes
+              </div>
+            }
+          </div>
+          
+          <div class="flex gap-3">
+            <button 
+              (click)="onMobileOverlayEditClick(mobileOverlayEventData)"
+              class="flex-1 bg-blue-600 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-700 transition-colors">
+              Edit
+            </button>
+            <button 
+              (click)="hideMobileOverlay()"
+              class="flex-1 bg-gray-200 text-gray-800 px-4 py-2 rounded-md font-medium hover:bg-gray-300 transition-colors">
+              Close
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   }

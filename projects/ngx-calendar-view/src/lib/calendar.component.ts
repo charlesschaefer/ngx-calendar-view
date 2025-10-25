@@ -41,6 +41,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
   private isDestroyed = signal(false);
   private popoverEvent = signal<CalendarEvent | null>(null);
   private popoverPosition = signal<{ x: number, y: number } | null>(null);
+  private mobileOverlayEvent = signal<CalendarEvent | null>(null);
+  private isMobile = signal(false);
+  private resizeListener?: () => void;
   
   // Computed properties
   currentDate = computed(() => this.calendarState.currentDate());
@@ -204,8 +207,20 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
     return (slotDuration * 2 / slotDuration) * 2; // 2 slots worth of height in rem
   }
 
-  // Popover management
+  // Mobile detection
+  private detectMobile(): void {
+    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+                          window.innerWidth <= 768;
+    this.isMobile.set(isMobileDevice);
+  }
+
+  // Popover management (desktop only)
   showPopover(event: CalendarEvent, mouseEvent?: MouseEvent | KeyboardEvent): void {
+    // Only show popover on desktop
+    if (this.isMobile()) {
+      return;
+    }
+    
     this.popoverEvent.set(event);
     if (mouseEvent) {
       this.popoverPosition.set({ x: (mouseEvent as MouseEvent).clientX, y: (mouseEvent as MouseEvent).clientY });
@@ -215,6 +230,20 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
   hidePopover(): void {
     this.popoverEvent.set(null);
     this.popoverPosition.set(null);
+  }
+
+  // Mobile overlay management
+  showMobileOverlay(event: CalendarEvent): void {
+    // Only show overlay on mobile
+    if (!this.isMobile()) {
+      return;
+    }
+    
+    this.mobileOverlayEvent.set(event);
+  }
+
+  hideMobileOverlay(): void {
+    this.mobileOverlayEvent.set(null);
   }
 
   // Check if popover should be shown
@@ -230,6 +259,16 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
   // Get popover position
   get popoverPositionData(): { x: number, y: number } | null {
     return this.popoverPosition();
+  }
+
+  // Check if mobile overlay should be shown
+  get shouldShowMobileOverlay(): boolean {
+    return this.mobileOverlayEvent() !== null;
+  }
+
+  // Get mobile overlay event
+  get mobileOverlayEventData(): CalendarEvent | null {
+    return this.mobileOverlayEvent();
   }
 
   // Check if hovering over a specific time slot
@@ -392,6 +431,13 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
+    // Initialize mobile detection
+    this.detectMobile();
+    
+    // Listen for window resize to update mobile detection
+    this.resizeListener = () => this.detectMobile();
+    window.addEventListener('resize', this.resizeListener);
+    
     // Initialize with config
     const config = this.config();
     if (config.defaultViewType) {
@@ -418,6 +464,11 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnDestroy(): void {
     this.isDestroyed.set(true);
     this.colorGenerator.reset();
+    
+    // Clean up resize listener
+    if (this.resizeListener) {
+      window.removeEventListener('resize', this.resizeListener);
+    }
   }
 
   // HammerJS Gesture Handling
@@ -631,6 +682,18 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onEventClick(event: CalendarEvent): void {
+    // On mobile, show overlay instead of emitting click event directly
+    if (this.isMobile()) {
+      console.log('Triggering mobile overlay onEventClick', event);
+      this.showMobileOverlay(event);
+    } else {
+      // On desktop, emit click event for edit functionality
+      this.clickEvent.emit(event);
+    }
+  }
+
+  onMobileOverlayEditClick(event: CalendarEvent): void {
+    this.hideMobileOverlay();
     this.clickEvent.emit(event);
   }
 

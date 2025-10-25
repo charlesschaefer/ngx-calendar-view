@@ -300,3 +300,68 @@
     border: 2px solid rgba(255, 255, 255, 0.8);
   }
 }
+
+// Mobile event overlay styles
+.mobile-event-overlay {
+  animation: fadeInOverlay 0.3s ease-out;
+  backdrop-filter: blur(2px);
+  
+  .mobile-event-details {
+    animation: slideInUp 0.3s ease-out;
+    max-height: 90vh;
+    overflow-y: auto;
+    
+    // Ensure proper touch targets for mobile
+    button {
+      min-height: 44px; // iOS recommended touch target size
+      touch-action: manipulation; // Prevent double-tap zoom
+    }
+    
+    // Improve readability on mobile
+    h3 {
+      line-height: 1.3;
+    }
+    
+    p {
+      line-height: 1.5;
+    }
+  }
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+// Ensure mobile overlay appears above everything
+.mobile-event-overlay {
+  z-index: 9999 !important;
+}
+
+// Responsive adjustments for mobile overlay
+@media (max-width: 768px) {
+  .mobile-event-overlay {
+    padding: 1rem;
+    
+    .mobile-event-details {
+      margin: 0;
+      max-width: none;
+      width: 100%;
+    }
+  }
+}
