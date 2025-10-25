@@ -353,8 +353,45 @@
   z-index: 9999 !important;
 }
 
-// Responsive adjustments for mobile overlay
+// Mobile header responsive adjustments
 @media (max-width: 768px) {
+  .calendar-header-mobile {
+    // Ensure proper touch targets for mobile
+    button {
+      min-height: 44px; // iOS recommended touch target size
+      min-width: 44px;
+      touch-action: manipulation; // Prevent double-tap zoom
+    }
+    
+    // Adjust spacing for mobile
+    .flex.items-center.space-x-2 {
+      gap: 0.5rem; // Reduce spacing on mobile
+    }
+    
+    // Make view type selector more compact on mobile
+    .view-type-selector {
+      gap: 0.125rem; // Reduce gap between view type buttons
+      
+      .view-type-button {
+        padding: 0.375rem 0.5rem; // Smaller padding for mobile
+        font-size: 0.75rem; // Smaller font size
+      }
+    }
+    
+    // Adjust title text size for mobile
+    h2 {
+      font-size: 1rem; // Slightly smaller title on mobile
+      line-height: 1.2;
+    }
+    
+    // Ensure Today button is touch-friendly
+    .today-button {
+      padding: 0.5rem 0.75rem; // Adequate touch target
+      font-size: 0.875rem;
+    }
+  }
+  
+  // Mobile overlay adjustments
   .mobile-event-overlay {
     padding: 1rem;
     
@@ -362,6 +399,43 @@
       margin: 0;
       max-width: none;
       width: 100%;
+    }
+  }
+}
+
+// Extra small screens (phones in portrait)
+@media (max-width: 480px) {
+  .calendar-header-mobile {
+    padding: 0.75rem; // Reduce padding on very small screens
+    
+    // Make navigation buttons smaller but still touchable
+    .flex.items-center.space-x-2 {
+      gap: 0.25rem;
+      
+      button {
+        padding: 0.5rem; // Smaller padding
+        min-width: 40px; // Slightly smaller but still touchable
+        min-height: 40px;
+      }
+    }
+    
+    // Make title even smaller on very small screens
+    h2 {
+      font-size: 0.875rem;
+    }
+    
+    // Make view type selector even more compact
+    .view-type-selector {
+      .view-type-button {
+        padding: 0.25rem 0.375rem;
+        font-size: 0.6875rem; // 11px
+      }
+    }
+    
+    // Adjust Today button for small screens
+    .today-button {
+      padding: 0.375rem 0.5rem;
+      font-size: 0.75rem;
     }
   }
 }

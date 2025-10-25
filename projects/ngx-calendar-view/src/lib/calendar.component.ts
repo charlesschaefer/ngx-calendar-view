@@ -78,18 +78,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.calendarUtils.generateMonthDays(this.currentDate());
   });
 
-  monthOptions = computed(() => {
-    const current = this.currentDate();
-    const options: { value: string | null; label: string }[] = [];
-    for (let i = -6; i <= 6; i++) {
-      const month = current.plus({ months: i });
-      options.push({
-        value: month.toISODate(),
-        label: month.toFormat('MMMM yyyy')
-      });
-    }
-    return options;
-  });
 
   // Check if any day in the week has all-day events
   hasAllDayEventsInWeek = computed(() => {
@@ -616,11 +604,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
     this.calendarState.setCurrentViewType(viewType);
   }
 
-  onMonthSelect(event: Event): void {
-    const target = event.target as HTMLSelectElement;
-    const selectedDate = DateTime.fromISO(target.value);
-    this.calendarState.setCurrentDate(selectedDate);
-  }
 
   // Drag and drop handlers
   onEventDragStart(event: CalendarEvent, mouseEvent: MouseEvent): void {
@@ -684,7 +667,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
   onEventClick(event: CalendarEvent): void {
     // On mobile, show overlay instead of emitting click event directly
     if (this.isMobile()) {
-      console.log('Triggering mobile overlay onEventClick', event);
       this.showMobileOverlay(event);
     } else {
       // On desktop, emit click event for edit functionality
