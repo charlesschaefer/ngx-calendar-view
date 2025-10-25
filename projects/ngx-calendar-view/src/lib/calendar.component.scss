@@ -1,6 +1,7 @@
 @use 'tailwind';
 
 .ncv-calendar-container {
+  // Base Colors
   --calendar-primary: #2563eb;
   --calendar-secondary: #64748b;
   --calendar-background: #ffffff;
@@ -8,24 +9,105 @@
   --calendar-border: #e2e8f0;
   --calendar-text: #1e293b;
   --calendar-text-secondary: #64748b;
+  
+  // Additional Colors
+  --calendar-success: #10b981;
+  --calendar-warning: #f59e0b;
+  --calendar-error: #ef4444;
+  --calendar-info: #3b82f6;
+  
+  // Neutral Colors
+  --calendar-gray-50: #f9fafb;
+  --calendar-gray-100: #f3f4f6;
+  --calendar-gray-200: #e5e7eb;
+  --calendar-gray-300: #d1d5db;
+  --calendar-gray-400: #9ca3af;
+  --calendar-gray-500: #6b7280;
+  --calendar-gray-600: #4b5563;
+  --calendar-gray-700: #374151;
+  --calendar-gray-800: #1f2937;
+  --calendar-gray-900: #111827;
+  
+  // Shadows
+  --calendar-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --calendar-shadow-md: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --calendar-shadow-lg: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --calendar-shadow-xl: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --calendar-shadow-2xl: 0 8px 25px rgba(0, 0, 0, 0.25);
+  --calendar-shadow-primary: 0 2px 4px rgba(37, 99, 235, 0.3);
+  --calendar-shadow-primary-lg: 0 4px 12px rgba(37, 99, 235, 0.3);
+  --calendar-shadow-inset: inset 0 0 0 2px rgba(59, 130, 246, 0.3);
+  --calendar-shadow-inset-hover: inset 0 0 0 2px rgba(59, 130, 246, 0.5);
+  
+  // Border Radius
+  --calendar-radius-sm: 0.25rem;
+  --calendar-radius-md: 0.375rem;
+  --calendar-radius-lg: 0.5rem;
+  --calendar-radius-xl: 0.75rem;
+  
+  // Border Widths
+  --calendar-border-width: 1px;
+  --calendar-border-width-thick: 2px;
+  
+  // Spacing
+  --calendar-spacing-xs: 0.125rem;
+  --calendar-spacing-sm: 0.25rem;
+  --calendar-spacing-md: 0.5rem;
+  --calendar-spacing-lg: 0.75rem;
+  --calendar-spacing-xl: 1rem;
+  --calendar-spacing-2xl: 1.5rem;
+  --calendar-spacing-3xl: 2rem;
+  
+  // Typography
+  --calendar-font-size-xs: 0.6875rem;
+  --calendar-font-size-sm: 0.75rem;
+  --calendar-font-size-base: 0.875rem;
+  --calendar-font-size-lg: 1rem;
+  --calendar-font-size-xl: 1.125rem;
+  --calendar-font-size-2xl: 1.25rem;
+  
+  --calendar-font-weight-normal: 400;
+  --calendar-font-weight-medium: 500;
+  --calendar-font-weight-semibold: 600;
+  --calendar-font-weight-bold: 700;
+  
+  --calendar-line-height-tight: 1.2;
+  --calendar-line-height-normal: 1.3;
+  --calendar-line-height-relaxed: 1.5;
+  
+  // Transitions
+  --calendar-transition-fast: 0.15s ease;
+  --calendar-transition-normal: 0.2s ease;
+  --calendar-transition-slow: 0.3s ease;
+  
+  // Z-Index
+  --calendar-z-dropdown: 10;
+  --calendar-z-sticky: 20;
+  --calendar-z-modal: 1000;
+  --calendar-z-popover: 9999;
+  
+  // Opacity
+  --calendar-opacity-disabled: 0.5;
+  --calendar-opacity-hover: 0.9;
+  --calendar-opacity-drag: 0.7;
 }
 
 .ncv-view-type-button {
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  border-radius: 0.5rem;
-  transition: all 0.2s ease;
-  border: 1px solid;
+  padding: var(--calendar-spacing-md) var(--calendar-spacing-xl);
+  font-size: var(--calendar-font-size-base);
+  font-weight: var(--calendar-font-weight-medium);
+  border-radius: var(--calendar-radius-lg);
+  transition: all var(--calendar-transition-normal);
+  border: var(--calendar-border-width) solid;
 }
 
 .ncv-view-type-button.ncv-active {
   background-color: var(--calendar-primary);
   color: var(--calendar-background);
   border-color: var(--calendar-primary);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--calendar-shadow-sm);
   transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+  box-shadow: var(--calendar-shadow-primary);
 }
 
 .ncv-view-type-button.ncv-inactive {
@@ -39,81 +121,81 @@
   border-color: var(--calendar-primary);
   color: var(--calendar-primary);
   transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--calendar-shadow-md);
 }
 
 // View type selector container
 .ncv-view-type-selector {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: var(--calendar-spacing-sm);
   background-color: var(--calendar-surface);
-  padding: 0.25rem;
-  border-radius: 0.5rem;
-  border: 1px solid var(--calendar-border);
+  padding: var(--calendar-spacing-sm);
+  border-radius: var(--calendar-radius-lg);
+  border: var(--calendar-border-width) solid var(--calendar-border);
 }
 
 // Today button styles
 .ncv-today-button {
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  border-radius: 0.375rem;
-  transition: all 0.2s ease;
-  border: 1px solid;
+  padding: var(--calendar-spacing-md) var(--calendar-spacing-xl);
+  font-size: var(--calendar-font-size-base);
+  font-weight: var(--calendar-font-weight-medium);
+  border-radius: var(--calendar-radius-md);
+  transition: all var(--calendar-transition-normal);
+  border: var(--calendar-border-width) solid;
 }
 
 .ncv-today-button.ncv-viewing-today {
   background-color: var(--calendar-primary);
   color: var(--calendar-background);
   border-color: var(--calendar-primary);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--calendar-shadow-sm);
   transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+  box-shadow: var(--calendar-shadow-primary);
 }
 
 .ncv-today-button.ncv-viewing-today:hover {
-  opacity: 0.9;
+  opacity: var(--calendar-opacity-hover);
 }
 
 .ncv-today-button.ncv-not-viewing-today {
-  background-color: #f3f4f6;
-  color: #6b7280;
-  border-color: #d1d5db;
+  background-color: var(--calendar-gray-100);
+  color: var(--calendar-gray-500);
+  border-color: var(--calendar-gray-300);
 }
 
 .ncv-today-button.ncv-not-viewing-today:hover {
-  background-color: #e5e7eb;
-  color: #374151;
-  border-color: #9ca3af;
+  background-color: var(--calendar-gray-200);
+  color: var(--calendar-gray-700);
+  border-color: var(--calendar-gray-400);
   transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--calendar-shadow-md);
 }
 
 // Event card styles with proper positioning
 .ncv-event-card {
-  transition: all 0.2s ease-in-out;
+  transition: all var(--calendar-transition-normal) ease-in-out;
   position: absolute;
-  z-index: 10;
+  z-index: var(--calendar-z-dropdown);
   
   &:hover {
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    z-index: 20; // Bring to front on hover
+    box-shadow: var(--calendar-shadow-lg);
+    z-index: var(--calendar-z-sticky); // Bring to front on hover
   }
   
   // Drag states
   &.ncv-dragging {
-    opacity: 0.7;
+    opacity: var(--calendar-opacity-drag);
     transform: scale(1.05);
-    z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: var(--calendar-z-modal);
+    box-shadow: var(--calendar-shadow-xl);
     cursor: grabbing;
   }
   
   &.ncv-drag-over {
     background-color: rgba(59, 130, 246, 0.1) !important;
-    border-color: #3b82f6 !important;
+    border-color: var(--calendar-info) !important;
   }
 }
 
@@ -122,27 +204,24 @@
   min-height: 2rem;
   position: relative;
   overflow: visible; // Allow events to extend beyond slot boundaries
-  transition: all 0.2s ease;
+  transition: all var(--calendar-transition-normal);
   
   &.ncv-drop-zone-active {
     background-color: rgba(59, 130, 246, 0.1);
-    border-color: #3b82f6;
-    box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.3);
+    border-color: var(--calendar-info);
+    box-shadow: var(--calendar-shadow-inset);
     &:hover {
       background-color: rgba(59, 130, 246, 0.3);
-      border-color: #3b82f6;
-      box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.5);
-      // background-color: rgba(34, 197, 94, 0.08) !important;
-      // border-color: #22c55e !important;
-      // box-shadow: inset 0 0 0 1px rgba(34, 197, 94, 0.2) !important;
+      border-color: var(--calendar-info);
+      box-shadow: var(--calendar-shadow-inset-hover);
     }
   }
 
   
   &.ncv-drag-hover-active {
     background-color: rgba(59, 130, 246, 0.1);
-    border-color: #3b82f6;
-    box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.3);
+    border-color: var(--calendar-info);
+    box-shadow: var(--calendar-shadow-inset);
   }
 }
 
@@ -165,30 +244,30 @@
 
 // All-day events styles
 .ncv-all-day-events-section {
-  margin-bottom: 1rem;
+  margin-bottom: var(--calendar-spacing-xl);
 }
 
 .ncv-all-day-header {
-  font-weight: 500;
+  font-weight: var(--calendar-font-weight-medium);
 }
 
 .ncv-all-day-events-container {
   min-height: 2rem;
-  transition: all 0.2s ease;
+  transition: all var(--calendar-transition-normal);
   
   &.ncv-drop-zone-active {
     background-color: rgba(59, 130, 246, 0.1);
-    border-color: #3b82f6;
-    box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.3);
+    border-color: var(--calendar-info);
+    box-shadow: var(--calendar-shadow-inset);
   }
 }
 
 .ncv-all-day-event-card {
-  transition: all 0.2s ease-in-out;
+  transition: all var(--calendar-transition-normal) ease-in-out;
   
   &:hover {
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--calendar-shadow-lg);
   }
 }
 
@@ -201,16 +280,16 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  transition: all 0.2s ease;
+  transition: all var(--calendar-transition-normal);
   
   &.ncv-drop-zone-active {
     background-color: rgba(59, 130, 246, 0.1);
-    border-color: #3b82f6;
-    box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.3);
+    border-color: var(--calendar-info);
+    box-shadow: var(--calendar-shadow-inset);
   }
   
   .ncv-all-day-event-card {
-    margin-bottom: 0.25rem;
+    margin-bottom: var(--calendar-spacing-sm);
     flex-shrink: 0; // Prevent shrinking
     
     &:last-child {
@@ -229,16 +308,16 @@
 // Month day styles for event display
 .ncv-month-day {
   min-height: 6rem;
-  transition: all 0.2s ease;
+  transition: all var(--calendar-transition-normal);
   
   &.ncv-drop-zone-active {
     background-color: rgba(59, 130, 246, 0.1);
-    border-color: #3b82f6;
-    box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.3);
+    border-color: var(--calendar-info);
+    box-shadow: var(--calendar-shadow-inset);
   }
   
   .ncv-event-card {
-    margin-bottom: 0.125rem; // space-y-0.5 equivalent
+    margin-bottom: var(--calendar-spacing-xs); // space-y-0.5 equivalent
     position: relative; // Override absolute positioning for month view
     display: block;
     width: 100%;
@@ -251,8 +330,8 @@
 
 // Event popover styles
 .ncv-event-popover {
-  animation: fadeIn 0.2s ease-in-out;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  animation: fadeIn var(--calendar-transition-normal) ease-in-out;
+  box-shadow: var(--calendar-shadow-2xl);
   
   // Arrow pointing to the event
   &::before {
@@ -272,7 +351,7 @@
     left: 50%;
     transform: translateX(-50%);
     border: 9px solid transparent;
-    border-top-color: #e5e7eb;
+    border-top-color: var(--calendar-gray-200);
     margin-top: -1px;
   }
 }
@@ -291,25 +370,25 @@
 // Drag preview styles
 .ncv-drag-preview {
   transform: translate(-50%, -50%);
-  opacity: 0.9;
+  opacity: var(--calendar-opacity-hover);
   transition: none; // Disable transitions for smooth following
   
   .ncv-event-card {
     min-width: 200px;
     max-width: 300px;
     transform: rotate(2deg); // Slight rotation for visual effect
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: var(--calendar-shadow-2xl);
+    border: var(--calendar-border-width-thick) solid rgba(255, 255, 255, 0.8);
   }
 }
 
 // Mobile event overlay styles
 .ncv-mobile-event-overlay {
-  animation: fadeInOverlay 0.3s ease-out;
+  animation: fadeInOverlay var(--calendar-transition-slow) ease-out;
   backdrop-filter: blur(2px);
   
   .ncv-mobile-event-details {
-    animation: slideInUp 0.3s ease-out;
+    animation: slideInUp var(--calendar-transition-slow) ease-out;
     max-height: 90vh;
     overflow-y: auto;
     
@@ -321,11 +400,11 @@
     
     // Improve readability on mobile
     h3 {
-      line-height: 1.3;
+      line-height: var(--calendar-line-height-normal);
     }
     
     p {
-      line-height: 1.5;
+      line-height: var(--calendar-line-height-relaxed);
     }
   }
 }
@@ -352,7 +431,7 @@
 
 // Ensure mobile overlay appears above everything
 .ncv-mobile-event-overlay {
-  z-index: 9999 !important;
+  z-index: var(--calendar-z-popover) !important;
 }
 
 // Mobile header responsive adjustments
@@ -367,35 +446,35 @@
     
     // Adjust spacing for mobile
     .ncv-flex.ncv-items-center.ncv-space-x-2 {
-      gap: 0.5rem; // Reduce spacing on mobile
+      gap: var(--calendar-spacing-md); // Reduce spacing on mobile
     }
     
     // Make view type selector more compact on mobile
     .ncv-view-type-selector {
-      gap: 0.125rem; // Reduce gap between view type buttons
+      gap: var(--calendar-spacing-xs); // Reduce gap between view type buttons
       
       .ncv-view-type-button {
-        padding: 0.375rem 0.5rem; // Smaller padding for mobile
-        font-size: 0.75rem; // Smaller font size
+        padding: var(--calendar-spacing-sm) var(--calendar-spacing-md); // Smaller padding for mobile
+        font-size: var(--calendar-font-size-sm); // Smaller font size
       }
     }
     
     // Adjust title text size for mobile (now in top row)
     h2 {
-      font-size: 1rem; // Slightly smaller title on mobile
-      line-height: 1.2;
+      font-size: var(--calendar-font-size-lg); // Slightly smaller title on mobile
+      line-height: var(--calendar-line-height-tight);
       margin-bottom: 0; // Remove default margin since we have mb-3 on container
     }
     
     // Ensure Today button is touch-friendly
     .ncv-today-button {
-      padding: 0.5rem 0.75rem; // Adequate touch target
-      font-size: 0.875rem;
+      padding: var(--calendar-spacing-md) var(--calendar-spacing-lg); // Adequate touch target
+      font-size: var(--calendar-font-size-base);
     }
     
     // Adjust spacing between rows
     .ncv-text-center.ncv-mb-3 {
-      margin-bottom: 0.75rem; // Consistent spacing between date and controls
+      margin-bottom: var(--calendar-spacing-lg); // Consistent spacing between date and controls
     }
     
     // Ensure proper alignment for the two-row layout
@@ -407,7 +486,7 @@
   
   // Mobile overlay adjustments
   .ncv-mobile-event-overlay {
-    padding: 1rem;
+    padding: var(--calendar-spacing-xl);
     
     .ncv-mobile-event-details {
       margin: 0;
@@ -420,14 +499,14 @@
 // Extra small screens (phones in portrait)
 @media (max-width: 480px) {
   .ncv-calendar-header-mobile {
-    padding: 0.75rem; // Reduce padding on very small screens
+    padding: var(--calendar-spacing-lg); // Reduce padding on very small screens
     
     // Make navigation buttons smaller but still touchable
     .ncv-flex.ncv-items-center.ncv-space-x-2 {
-      gap: 0.25rem;
+      gap: var(--calendar-spacing-sm);
       
       button {
-        padding: 0.5rem; // Smaller padding
+        padding: var(--calendar-spacing-md); // Smaller padding
         min-width: 40px; // Slightly smaller but still touchable
         min-height: 40px;
       }
@@ -435,26 +514,26 @@
     
     // Make title even smaller on very small screens
     h2 {
-      font-size: 0.875rem;
+      font-size: var(--calendar-font-size-base);
     }
     
     // Make view type selector even more compact
     .ncv-view-type-selector {
       .ncv-view-type-button {
-        padding: 0.25rem 0.375rem;
-        font-size: 0.6875rem; // 11px
+        padding: var(--calendar-spacing-sm) var(--calendar-spacing-sm);
+        font-size: var(--calendar-font-size-xs); // 11px
       }
     }
     
     // Adjust Today button for small screens
     .ncv-today-button {
-      padding: 0.375rem 0.5rem;
-      font-size: 0.75rem;
+      padding: var(--calendar-spacing-sm) var(--calendar-spacing-md);
+      font-size: var(--calendar-font-size-sm);
     }
     
     // Reduce spacing between rows on very small screens
     .ncv-text-center.ncv-mb-3 {
-      margin-bottom: 0.5rem;
+      margin-bottom: var(--calendar-spacing-md);
     }
   }
 }
