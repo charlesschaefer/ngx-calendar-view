@@ -13,7 +13,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve ngx-calendar-view-demo",
-    "build": "ng build ngx-calendar-view",
+    "build": "npx tailwindcss -c projects/ngx-calendar-view/tailwind.config.js -o projects/ngx-calendar-view/src/lib/tailwind.scss && ng build ngx-calendar-view",
     "watch": "ng build ngx-calendar-view --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
