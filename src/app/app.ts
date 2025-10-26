@@ -13,6 +13,7 @@ import { CalendarComponent, CalendarEvent, CalendarProject, CalendarConfig, Cale
   styleUrl: './app.scss',
   standalone: true
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class App {
   protected title = 'ngx-calendar-view Demo';
 
