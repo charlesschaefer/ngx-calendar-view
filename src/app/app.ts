@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -14,8 +14,23 @@ import { CalendarComponent, CalendarEvent, CalendarProject, CalendarConfig, Cale
   standalone: true
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
-export class App {
+export class App implements OnInit {
   protected title = 'ngx-calendar-view Demo';
+
+  // Dark mode state
+  isDarkMode = signal(this.getInitialTheme());
+
+  constructor() {
+    // Apply initial theme
+    effect(() => {
+      this.applyTheme(this.isDarkMode());
+    });
+  }
+
+  ngOnInit(): void {
+    // Apply theme on component initialization
+    this.applyTheme(this.isDarkMode());
+  }
 
   // Modal state
   showEventModal = signal(false);
@@ -219,7 +234,7 @@ export class App {
     if (!this.eventForm.title.trim()) return;
 
     const events = this.sampleEvents();
-    
+
     if (this.isEditing()) {
       // Update existing event
       const eventIndex = events.findIndex(e => e.id === this.currentEvent()?.id);
@@ -289,7 +304,7 @@ export class App {
 
   private parseTime(): DateTime | undefined {
     if (!this.eventForm.time || this.eventForm.isAllDay) return undefined;
-    
+
     const [hours, minutes] = this.eventForm.time.split(':').map(Number);
     const baseDate = this.newEventData()?.date || this.currentEvent()?.date;
     return baseDate?.set({ hour: hours, minute: minutes });
@@ -304,6 +319,37 @@ export class App {
       // If no time is provided, it's an all-day event
       this.eventForm.isAllDay = true;
       this.eventForm.time = '';
+    }
+  }
+
+  toggleTheme(): void {
+    this.isDarkMode.update(mode => {
+      const newMode = !mode;
+      this.applyTheme(newMode);
+      return newMode;
+    });
+  }
+
+  private getInitialTheme(): boolean {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('darkMode');
+      if (stored !== null) {
+        return stored === 'true';
+      }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    return false;
+  }
+
+  private applyTheme(isDark: boolean): void {
+    if (typeof window !== 'undefined') {
+      const htmlElement = document.documentElement;
+      if (isDark) {
+        htmlElement.classList.add('dark');
+      } else {
+        htmlElement.classList.remove('dark');
+      }
+      localStorage.setItem('darkMode', String(isDark));
     }
   }
 }

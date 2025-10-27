@@ -6,19 +6,19 @@
         <div class="ncv-calendar-header-desktop ncv-p-4 ncv-border-b ncv-border-calendar-border">
           <div class="ncv-flex ncv-items-center ncv-justify-between">
             <div class="ncv-flex ncv-items-center ncv-space-x-4">
-              <button 
+              <button
                 (click)="navigatePrevious()"
                 class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
                 <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
               </button>
-              <button 
+              <button
                 (click)="navigateToday()"
                 [class]="getTodayButtonClass()">
                 Today
               </button>
-              <button 
+              <button
                 (click)="navigateNext()"
                 class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
                 <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -32,7 +32,7 @@
             @if (config().showViewTypeSelector !== false) {
               <div class="ncv-view-type-selector ncv-flex ncv-items-center ncv-space-x-2">
                 @for (viewType of viewTypes; track viewType) {
-                  <button 
+                  <button
                     (click)="setViewType(viewType)"
                     [class]="getViewTypeButtonClass(viewType)">
                     {{ viewType | titlecase }}
@@ -47,19 +47,19 @@
         <div class="ncv-calendar-header-desktop ncv-p-4 ncv-border-b ncv-border-calendar-border">
           <div class="ncv-flex ncv-items-center ncv-justify-between">
             <div class="ncv-flex ncv-items-center ncv-space-x-4">
-              <button 
+              <button
                 (click)="navigatePrevious()"
                 class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
                 <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
               </button>
-              <button 
+              <button
                 (click)="navigateToday()"
                 [class]="getTodayButtonClass()">
                 Today
               </button>
-              <button 
+              <button
                 (click)="navigateNext()"
                 class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
                 <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -73,7 +73,7 @@
             @if (config().showViewTypeSelector !== false) {
               <div class="ncv-view-type-selector ncv-flex ncv-items-center ncv-space-x-2">
                 @for (viewType of viewTypes; track viewType) {
-                  <button 
+                  <button
                     (click)="setViewType(viewType)"
                     [class]="getViewTypeButtonClass(viewType)">
                     {{ viewType | titlecase }}
@@ -88,19 +88,19 @@
         <div class="ncv-calendar-header-desktop ncv-p-4 ncv-border-b ncv-border-calendar-border">
           <div class="ncv-flex ncv-items-center ncv-justify-between">
             <div class="ncv-flex ncv-items-center ncv-space-x-4">
-              <button 
+              <button
                 (click)="navigatePrevious()"
                 class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
                 <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
               </button>
-              <button 
+              <button
                 (click)="navigateToday()"
                 [class]="getTodayButtonClass()">
                 Today
               </button>
-              <button 
+              <button
                 (click)="navigateNext()"
                 class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
                 <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -114,7 +114,7 @@
             @if (config().showViewTypeSelector !== false) {
               <div class="ncv-view-type-selector ncv-flex ncv-items-center ncv-space-x-2">
                 @for (viewType of viewTypes; track viewType) {
-                  <button 
+                  <button
                     (click)="setViewType(viewType)"
                     [class]="getViewTypeButtonClass(viewType)">
                     {{ viewType | titlecase }}
@@ -142,19 +142,19 @@
           <!-- Navigation controls row -->
           <div class="ncv-flex ncv-items-center ncv-justify-between">
             <div class="ncv-flex ncv-items-center ncv-space-x-2">
-              <button 
+              <button
                 (click)="navigatePrevious()"
                 class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
                 <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
               </button>
-              <button 
+              <button
                 (click)="navigateToday()"
                 [class]="getTodayButtonClass()">
                 Today
               </button>
-              <button 
+              <button
                 (click)="navigateNext()"
                 class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
                 <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -165,7 +165,7 @@
             @if (config().showViewTypeSelector !== false) {
               <div class="ncv-view-type-selector ncv-flex ncv-items-center ncv-space-x-1">
                 @for (viewType of viewTypes; track viewType) {
-                  <button 
+                  <button
                     (click)="setViewType(viewType)"
                     [class]="getViewTypeButtonClass(viewType)">
                     {{ viewType | titlecase }}
@@ -187,19 +187,19 @@
           <!-- Navigation controls row -->
           <div class="ncv-flex ncv-items-center ncv-justify-between">
             <div class="ncv-flex ncv-items-center ncv-space-x-2">
-              <button 
+              <button
                 (click)="navigatePrevious()"
                 class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
                 <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
               </button>
-              <button 
+              <button
                 (click)="navigateToday()"
                 [class]="getTodayButtonClass()">
                 Today
               </button>
-              <button 
+              <button
                 (click)="navigateNext()"
                 class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
                 <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -210,7 +210,7 @@
             @if (config().showViewTypeSelector !== false) {
               <div class="ncv-view-type-selector ncv-flex ncv-items-center ncv-space-x-1">
                 @for (viewType of viewTypes; track viewType) {
-                  <button 
+                  <button
                     (click)="setViewType(viewType)"
                     [class]="getViewTypeButtonClass(viewType)">
                     {{ viewType | titlecase }}
@@ -232,19 +232,19 @@
           <!-- Navigation controls row -->
           <div class="ncv-flex ncv-items-center ncv-justify-between">
             <div class="ncv-flex ncv-items-center ncv-space-x-2">
-              <button 
+              <button
                 (click)="navigatePrevious()"
                 class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
                 <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
               </button>
-              <button 
+              <button
                 (click)="navigateToday()"
                 [class]="getTodayButtonClass()">
                 Today
               </button>
-              <button 
+              <button
                 (click)="navigateNext()"
                 class="ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-rounded-md ncv-transition-colors">
                 <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -255,7 +255,7 @@
             @if (config().showViewTypeSelector !== false) {
               <div class="ncv-view-type-selector ncv-flex ncv-items-center ncv-space-x-1">
                 @for (viewType of viewTypes; track viewType) {
-                  <button 
+                  <button
                     (click)="setViewType(viewType)"
                     [class]="getViewTypeButtonClass(viewType)">
                     {{ viewType | titlecase }}
@@ -281,13 +281,13 @@
                 <div class="ncv-all-day-header ncv-bg-calendar-surface ncv-p-2 ncv-rounded-md ncv-mb-2">
                   <div class="ncv-text-sm ncv-font-medium ncv-text-calendar-text-secondary">All Day</div>
                 </div>
-                <div 
+                <div
                   class="ncv-all-day-events-container"
                   [class.ncv-drop-zone-active]="dragState().isDragging && dragState().dropTarget?.date?.toISODate() === currentDate().toISODate() && !dragState().dropTarget?.time"
                   [attr.data-date]="currentDate().toISODate()">
                   @for (event of getAllDayEvents(currentDate()); track event.id) {
-                    
-                    <div 
+
+                    <div
                       class="ncv-all-day-event-card ncv-p-2 ncv-rounded ncv-text-xs ncv-cursor-pointer ncv-shadow-sm ncv-border-l-2 ncv-mb-1"
                       [style.background-color]="getEventProjectColor(event)"
                       [style.border-left-color]="getEventProjectColor(event)"
@@ -299,7 +299,7 @@
                       (click)="onEventClick(event); $event.stopPropagation()"
                       (keydown)="onEventClick(event); $event.stopPropagation()"
                       tabindex="0">
-                    
+
                       <div class="ncv-font-medium ncv-text-gray-800">{{ event.title }}</div>
                       @if (event.description) {
                         <div class="ncv-text-gray-600 ncv-text-xs ncv-mt-1">{{ event.description }}</div>
@@ -309,13 +309,13 @@
                 </div>
               </div>
             }
-            
+
             <div class="ncv-time-slot-header ncv-bg-calendar-surface ncv-p-2 ncv-rounded-md">
               <div class="ncv-text-sm ncv-font-medium ncv-text-calendar-text-secondary ncv-p-2">Time</div>
             </div>
             <div class="ncv-time-slots">
               @for (slot of timeSlots(); track slot.time.toMillis()) {
-                <div 
+                <div
                   class="ncv-time-slot ncv-min-h-slot ncv-border-b ncv-border-calendar-border ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-cursor-pointer ncv-relative"
                   [class.ncv-drop-zone-active]="dragState().isDragging && dragState().dropTarget?.date?.toISODate() === currentDate().toISODate() && dragState().dropTarget?.time?.toISODate() === slot.time.toISODate()"
                   [class.ncv-drag-hover-active]="dragState().isDragging && isHoveringTimeSlot(slot.time, currentDate())"
@@ -329,8 +329,8 @@
                   @for (stackedEvent of getStackedEventsForSlot(getEventsForTimeSlot(slot.time)); track stackedEvent.event.id) {
                     @let position = getEventPositionInSlot(stackedEvent.event, slot.time);
                     @let slotDuration = config().timeSlotDuration || 30;
-                      
-                      <div 
+
+                      <div
                         class="ncv-event-card ncv-rounded ncv-text-xs ncv-cursor-pointer ncv-shadow-sm ncv-border-l-2"
                         [style.background-color]="getEventProjectColor(stackedEvent.event)"
                         [style.border-left-color]="getEventProjectColor(stackedEvent.event)"
@@ -346,7 +346,7 @@
                         (click)="onEventClick(stackedEvent.event); $event.stopPropagation()"
                         (keydown)="onEventClick(stackedEvent.event); $event.stopPropagation()"
                         tabindex="0">
-                        
+
                       <div class="ncv-font-medium ncv-text-gray-800 ncv-truncate ncv-p-1">{{ stackedEvent.event.title }}</div>
                       @if (stackedEvent.event.description && shouldShowDescription(stackedEvent.event, slotDuration)) {
                         <div class="ncv-text-gray-600 ncv-truncate ncv-px-1 ncv-pb-1">{{ stackedEvent.event.description }}</div>
@@ -369,7 +369,7 @@
               </div>
               <!-- All-day events row -->
               @if (hasAllDayEventsInWeek()) {
-                <div 
+                <div
                   class="ncv-all-day-row ncv-min-h-slot ncv-border-b ncv-border-calendar-border ncv-p-1"
                   [style.height]="getAllDayRowHeight()">
                   <div class="ncv-text-xs ncv-text-calendar-text-secondary">All Day</div>
@@ -390,7 +390,7 @@
                 </div>
                 <!-- All-day events for this day -->
                 @if (hasAllDayEventsInWeek()) {
-                  <div 
+                  <div
                     class="ncv-all-day-events-day ncv-border-b ncv-border-calendar-border ncv-p-1 ncv-hover:ncv-bg-calendar-surface ncv-cursor-pointer"
                     [style.height]="getAllDayRowHeight()"
                     [class.ncv-drop-zone-active]="dragState().isDragging && dragState().dropTarget?.date?.toISODate() === day.toISODate() && !dragState().dropTarget?.time"
@@ -400,8 +400,8 @@
                     tabindex="0">
                     @if (getAllDayEvents(day).length > 0) {
                       @for (event of getAllDayEvents(day); track event.id) {
-                        
-                        <div 
+
+                        <div
                           class="ncv-all-day-event-card ncv-p-1 ncv-rounded ncv-text-xs ncv-cursor-pointer ncv-shadow-sm ncv-border-l-2 ncv-mb-1"
                           [style.background-color]="getEventProjectColor(event)"
                           [style.border-left-color]="getEventProjectColor(event)"
@@ -413,7 +413,7 @@
                           (click)="onEventClick(event); $event.stopPropagation()"
                           (keydown)="onEventClick(event); $event.stopPropagation()"
                           tabindex="0">
-                        
+
                           <div class="ncv-font-medium ncv-text-gray-800 ncv-truncate">{{ event.title }}</div>
                         </div>
                       }
@@ -425,7 +425,7 @@
                   </div>
                 }
                 @for (slot of timeSlots(); track slot.time.toMillis()) {
-                  <div 
+                  <div
                     class="ncv-time-slot ncv-min-h-slot ncv-border-b ncv-border-calendar-border ncv-hover:ncv-bg-calendar-surface ncv-cursor-pointer ncv-relative"
                     [class.ncv-drop-zone-active]="dragState().isDragging && dragState().dropTarget?.date?.toISODate() === day.toISODate() && dragState().dropTarget?.time?.toISODate() === slot.time.toISODate()"
                     [class.ncv-drag-hover-active]="dragState().isDragging && isHoveringTimeSlot(slot.time, day)"
@@ -438,8 +438,8 @@
                     @for (stackedEvent of getStackedEventsForSlot(getEventsForTimeSlot(slot.time, day)); track stackedEvent.event.id) {
                       @let position = getEventPositionInSlot(stackedEvent.event, slot.time);
                       @let slotDuration = config().timeSlotDuration || 30;
-                      
-                      <div 
+
+                      <div
                         class="ncv-event-card ncv-rounded ncv-text-xs ncv-cursor-pointer ncv-shadow-sm ncv-border-l-2"
                         [style.background-color]="getEventProjectColor(stackedEvent.event)"
                         [style.border-left-color]="getEventProjectColor(stackedEvent.event)"
@@ -455,7 +455,7 @@
                         (click)="onEventClick(stackedEvent.event); $event.stopPropagation()"
                         (keydown)="onEventClick(stackedEvent.event); $event.stopPropagation()"
                         tabindex="0">
-                      
+
                         <div class="ncv-font-medium ncv-text-gray-800 ncv-truncate ncv-p-1">{{ stackedEvent.event.title }}</div>
                         @if (stackedEvent.event.description && shouldShowDescription(stackedEvent.event, slotDuration)) {
                           <div class="ncv-text-gray-600 ncv-truncate ncv-px-1 ncv-pb-1">{{ stackedEvent.event.description }}</div>
@@ -480,7 +480,7 @@
             }
             <!-- Month days -->
             @for (day of monthDays(); track day.toISODate()) {
-              <div 
+              <div
                 class="ncv-month-day ncv-min-h-24 ncv-border ncv-border-calendar-border ncv-p-2 ncv-hover:ncv-bg-calendar-surface ncv-cursor-pointer ncv-relative"
                 [class.ncv-bg-calendar-surface]="!isCurrentMonth(day, currentDate())"
                 [class.ncv-font-semibold]="isToday(day)"
@@ -496,8 +496,8 @@
                   @let visibleEvents = getVisibleEvents(dayEvents, 3);
                   <div class="ncv-mt-1 ncv-space-y-0.5">
                     @for (event of visibleEvents.visible; track event.id) {
-                      
-                      <div 
+
+                      <div
                         class="ncv-event-card ncv-p-1 ncv-rounded ncv-text-xs ncv-cursor-pointer ncv-shadow-sm ncv-border-l-2 ncv-truncate ncv-block ncv-w-full"
                         [style.background-color]="getEventProjectColor(event)"
                         [style.border-left-color]="getEventProjectColor(event)"
@@ -507,7 +507,7 @@
                         (click)="onEventClick(event); $event.stopPropagation()"
                         (keydown)="onEventClick(event); $event.stopPropagation()"
                         tabindex="0">
-                      
+
                         <div class="ncv-font-medium ncv-text-gray-800 ncv-truncate">{{ event.title }}</div>
                         @if (event.time) {
                           <div class="ncv-text-gray-600 ncv-text-xs">{{ event.time.toFormat('HH:mm') }}</div>
@@ -515,7 +515,7 @@
                       </div>
                     }
                     @if (visibleEvents.hidden > 0) {
-                      <div 
+                      <div
                         class="ncv-text-xs ncv-text-blue-600 ncv-hover:ncv-text-blue-800 ncv-cursor-pointer ncv-font-medium ncv-mt-1"
                         (click)="$event.stopPropagation()"
                         (keydown)="$event.stopPropagation()"
@@ -535,11 +535,11 @@
 
   <!-- Drag Preview -->
   @if (dragState().isDragging && dragState().draggedEvent) {
-    <div 
+    <div
       class="ncv-drag-preview ncv-fixed ncv-pointer-events-none ncv-z-50"
       [style.left.px]="dragState().dragPosition?.x || 0"
       [style.top.px]="dragState().dragPosition?.y || 0">
-      <div 
+      <div
         class="ncv-event-card ncv-rounded ncv-text-xs ncv-shadow-lg ncv-border-l-2 ncv-p-2"
         [style.background-color]="getEventProjectColor(dragState().draggedEvent!)"
         [style.border-left-color]="getEventProjectColor(dragState().draggedEvent!)">
@@ -553,13 +553,13 @@
 
   <!-- Event Details Popover (Desktop) -->
   @if (shouldShowPopover && popoverEventData) {
-    <div 
+    <div
       class="ncv-event-popover ncv-fixed ncv-z-50 ncv-bg-white ncv-border ncv-border-gray-200 ncv-rounded-lg ncv-shadow-lg ncv-p-4 ncv-max-w-sm"
       [style.left.px]="popoverPositionData?.x || 0"
       [style.top.px]="(popoverPositionData?.y || 0) - 10">
       <div class="ncv-flex ncv-items-start ncv-justify-between ncv-mb-2">
         <h3 class="ncv-font-semibold ncv-text-gray-900 ncv-text-sm">{{ popoverEventData.title }}</h3>
-        <button 
+        <button
           (click)="hidePopover()"
           class="ncv-text-gray-400 ncv-hover:ncv-text-gray-600 ncv-ml-2">
           <svg class="ncv-w-4 ncv-h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -567,11 +567,11 @@
           </svg>
         </button>
       </div>
-      
+
       @if (popoverEventData.description) {
         <p class="ncv-text-gray-600 ncv-text-sm ncv-mb-3">{{ popoverEventData.description }}</p>
       }
-      
+
       <div class="ncv-space-y-1 ncv-text-xs ncv-text-gray-500">
         @if (popoverEventData.time) {
           <div class="ncv-flex ncv-items-center">
@@ -584,24 +584,24 @@
             }
           </div>
         }
-        
+
         <div class="ncv-flex ncv-items-center">
           <svg class="ncv-w-3 ncv-h-3 ncv-mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
           </svg>
           {{ (popoverEventData.time || popoverEventData.date).toFormat('EEEE, MMMM d, yyyy') }}
         </div>
-        
+
         @if (popoverEventData.project) {
           <div class="ncv-flex ncv-items-center">
-            <div 
+            <div
               class="ncv-w-3 ncv-h-3 ncv-rounded-full ncv-mr-1"
               [style.background-color]="getEventProjectColor(popoverEventData)">
             </div>
             {{ popoverEventData.project }}
           </div>
         }
-        
+
         @if (popoverEventData.duration) {
           <div class="ncv-flex ncv-items-center">
             <svg class="ncv-w-3 ncv-h-3 ncv-mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -616,7 +616,7 @@
 
   <!-- Mobile Event Details Overlay -->
   @if (shouldShowMobileOverlay && mobileOverlayEventData) {
-    <div 
+    <div
       class="ncv-mobile-event-overlay ncv-fixed ncv-inset-0 ncv-z-50 ncv-bg-black ncv-bg-opacity-50 ncv-flex ncv-items-center ncv-justify-center ncv-p-4"
       (click)="hideMobileOverlay()"
       (keydown)="hideMobileOverlay()"
@@ -624,7 +624,7 @@
       role="dialog"
       aria-modal="true"
       aria-labelledby="mobile-event-title">
-      <div 
+      <div
         class="ncv-mobile-event-details ncv-bg-white ncv-rounded-lg ncv-shadow-xl ncv-max-w-sm ncv-w-full ncv-mx-4"
         (click)="$event.stopPropagation()"
         (keydown)="$event.stopPropagation()"
@@ -632,7 +632,7 @@
         <div class="ncv-p-6">
           <div class="ncv-flex ncv-items-start ncv-justify-between ncv-mb-4">
             <h3 id="mobile-event-title" class="ncv-font-semibold ncv-text-gray-900 ncv-text-lg">{{ mobileOverlayEventData.title }}</h3>
-            <button 
+            <button
               (click)="hideMobileOverlay()"
               class="ncv-text-gray-400 ncv-hover:ncv-text-gray-600 ncv-ml-2 ncv-p-1">
               <svg class="ncv-w-5 ncv-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -640,11 +640,11 @@
               </svg>
             </button>
           </div>
-          
+
           @if (mobileOverlayEventData.description) {
             <p class="ncv-text-gray-600 ncv-text-sm ncv-mb-4">{{ mobileOverlayEventData.description }}</p>
           }
-          
+
           <div class="ncv-space-y-3 ncv-text-sm ncv-text-gray-500 ncv-mb-6">
             @if (mobileOverlayEventData.time) {
               <div class="ncv-flex ncv-items-center">
@@ -657,24 +657,24 @@
                 }
               </div>
             }
-            
+
             <div class="ncv-flex ncv-items-center">
               <svg class="ncv-w-4 ncv-h-4 ncv-mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
               </svg>
               {{ (mobileOverlayEventData.time || mobileOverlayEventData.date).toFormat('EEEE, MMMM d, yyyy') }}
             </div>
-            
+
             @if (mobileOverlayEventData.project) {
               <div class="ncv-flex ncv-items-center">
-                <div 
+                <div
                   class="ncv-w-4 ncv-h-4 ncv-rounded-full ncv-mr-2"
                   [style.background-color]="getEventProjectColor(mobileOverlayEventData)">
                 </div>
                 {{ mobileOverlayEventData.project }}
               </div>
             }
-            
+
             @if (mobileOverlayEventData.duration) {
               <div class="ncv-flex ncv-items-center">
                 <svg class="ncv-w-4 ncv-h-4 ncv-mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -684,14 +684,14 @@
               </div>
             }
           </div>
-          
+
           <div class="ncv-flex ncv-gap-3">
-            <button 
+            <button
               (click)="onMobileOverlayEditClick(mobileOverlayEventData)"
               class="ncv-flex-1 ncv-bg-blue-600 ncv-text-white ncv-px-4 ncv-py-2 ncv-rounded-md ncv-font-medium ncv-hover:ncv-bg-blue-700 ncv-transition-colors">
               Edit
             </button>
-            <button 
+            <button
               (click)="hideMobileOverlay()"
               class="ncv-flex-1 ncv-bg-gray-200 ncv-text-gray-800 ncv-px-4 ncv-py-2 ncv-rounded-md ncv-font-medium ncv-hover:ncv-bg-gray-300 ncv-transition-colors">
               Close

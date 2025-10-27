@@ -9,3 +9,16 @@
         border-left: 4px solid #f59e0b !important;
     }
 }
+
+/* Dark mode support for project borders */
+.dark .projects {
+    .work {
+        border-left: 4px solid #60a5fa !important;
+    }
+    .personal {
+        border-left: 4px solid #34d399 !important;
+    }
+    .health {
+        border-left: 4px solid #fbbf24 !important;
+    }
+}

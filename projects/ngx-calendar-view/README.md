@@ -1,6 +1,34 @@
 # ngx-calendar-view
 
-A responsive Angular calendar component library with day/week/month views, drag-and-drop events, and mobile swipe support.
+A responsive Angular calendar component library with day/week/month views, drag-and-drop events, mobile swipe support, and built-in dark mode.
+
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+  - [1. Import the Component](#1-import-the-component)
+  - [2. Define Your Data](#2-define-your-data)
+  - [3. Handle Events](#3-handle-events)
+- [API Reference](#api-reference)
+  - [CalendarEvent Interface](#calendarevent-interface)
+  - [CalendarProject Interface](#calendarproject-interface)
+  - [CalendarConfig Interface](#calendarconfig-interface)
+  - [CalendarViewType Enum](#calendarviewtype-enum)
+- [Theming & Customization](#theming--customization)
+  - [CSS Custom Properties](#css-custom-properties)
+  - [Customization Examples](#customization-examples)
+    - [Dark mode](#dark-mode)
+  - [Global Override](#global-override)
+  - [Component-Specific Override](#component-specific-override)
+  - [Tailwind Integration](#tailwind-integration)
+- [Responsive Behavior](#responsive-behavior)
+- [Browser Support](#browser-support)
+- [Dependencies](#dependencies)
+- [Development](#development)
+- [Contributing](#contributing)
+- [License](#license)
+- [Changelog](#changelog)
 
 ## Features
 
@@ -8,6 +36,7 @@ A responsive Angular calendar component library with day/week/month views, drag-
 - 📱 **Responsive Design**: Optimized for both desktop and mobile devices
 - 🖱️ **Drag & Drop**: Move events between time slots
 - 👆 **Touch Gestures**: Swipe navigation on mobile devices
+- 🌙 **Dark Mode**: Built-in dark mode support with automatic color adjustments
 - 🎨 **Customizable**: Configurable time slots, colors, and styling
 - ⚡ **Modern Angular**: Built with Angular 20+ using signals and standalone components
 - 🎯 **TypeScript**: Fully typed with comprehensive interfaces
@@ -291,18 +320,42 @@ The component exposes a comprehensive set of CSS custom properties organized int
 
 ### Customization Examples
 
-#### Dark Theme
-```css
-.ncv-calendar-container {
-  --calendar-primary: #3b82f6;
-  --calendar-secondary: #9ca3af;
-  --calendar-background: #1f2937;
-  --calendar-surface: #374151;
-  --calendar-border: #4b5563;
-  --calendar-text: #f9fafb;
-  --calendar-text-secondary: #d1d5db;
-}
+#### Dark Mode
+
+The component supports dark mode out of the box. To activate it, simply add the `dark` class to your HTML root element:
+
+```html
+<html class="dark">
+  <!-- Your app -->
+</html>
 ```
+
+The calendar will automatically switch to dark mode styling with appropriate color adjustments.
+
+You can toggle dark mode dynamically:
+
+```typescript
+// Enable dark mode
+document.documentElement.classList.add('dark');
+
+// Disable dark mode
+document.documentElement.classList.remove('dark');
+
+// Toggle dark mode
+document.documentElement.classList.toggle('dark');
+```
+
+Alternatively, you can use a theme service or state management to control dark mode globally across your application.
+
+**Dark Mode Colors:**
+The component automatically applies the following dark mode color scheme:
+- Background: `#1e293b`
+- Surface: `#0f172a`
+- Text: `#f1f5f9`
+- Primary: `#3b82f6`
+- Borders: `#334155`
+
+You can customize these by overriding the CSS variables within your application styles.
 
 #### Custom Brand Colors
 ```css
@@ -434,4 +487,5 @@ MIT License - see LICENSE file for details.
 - Drag and drop support
 - Mobile swipe gestures
 - Responsive design
+- Dark mode support
 - TypeScript support

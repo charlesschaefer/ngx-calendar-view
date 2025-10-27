@@ -44,14 +44,14 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
   private mobileOverlayEvent = signal<CalendarEvent | null>(null);
   private isMobile = signal(false);
   private resizeListener?: () => void;
-  
+
   // Computed properties
   currentDate = computed(() => this.calendarState.currentDate());
   currentViewType = computed(() => this.calendarState.currentViewType());
-  
+
   // Drag state
   dragState = computed(() => this.dragDropService.getDragState());
-  
+
   // View types
   viewTypes = Object.values(CalendarViewType);
   CalendarViewType = CalendarViewType; // Make enum available in template
@@ -88,12 +88,12 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
   maxAllDayEventsInWeek = computed(() => {
     const weekDays = this.weekDays();
     let maxEvents = 0;
-    
+
     for (const day of weekDays) {
       const allDayEventsCount = this.getAllDayEvents(day).length;
       maxEvents = Math.max(maxEvents, allDayEventsCount);
     }
-    
+
     return maxEvents;
   });
 
@@ -101,13 +101,13 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
   getAllDayRowHeight(): string {
     const maxEvents = this.maxAllDayEventsInWeek();
     if (maxEvents === 0) return '2rem'; // Minimum height when no events
-    
+
     // Each event takes approximately 1.5rem + 0.25rem margin
     // Add some padding for the container
     const eventHeight = 1.5; // rem
     const marginHeight = 0.25; // rem
     const paddingHeight = 0.5; // rem
-    
+
     const totalHeight = (maxEvents * (eventHeight + marginHeight)) + paddingHeight;
     return `${totalHeight}rem`;
   }
@@ -163,13 +163,13 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
     const targetDate = date || this.currentDate();
     const events = this.getTimedEvents(targetDate); // Only get timed events
     const slotDuration = this.config().timeSlotDuration || 30;
-    
+
     return events.filter(event => {
       const eventTime = event.time!; // We know it has time since we filtered for timed events
       const eventStartMinutes = eventTime.hour * 60 + eventTime.minute;
       const slotStartMinutes = time.hour * 60 + time.minute;
       const slotEndMinutes = slotStartMinutes + slotDuration;
-      
+
       // Only show events that START within this time slot
       return eventStartMinutes >= slotStartMinutes && eventStartMinutes < slotEndMinutes;
     });
@@ -208,7 +208,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.isMobile()) {
       return;
     }
-    
+
     this.popoverEvent.set(event);
     if (mouseEvent) {
       this.popoverPosition.set({ x: (mouseEvent as MouseEvent).clientX, y: (mouseEvent as MouseEvent).clientY });
@@ -226,7 +226,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
     if (!this.isMobile()) {
       return;
     }
-    
+
     this.mobileOverlayEvent.set(event);
   }
 
@@ -262,8 +262,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
   // Check if hovering over a specific time slot
   isHoveringTimeSlot(time: DateTime, date: DateTime): boolean {
     const hoveredSlot = this.dragDropService.getHoveredTimeSlot();
-    return hoveredSlot !== null && 
-           hoveredSlot.time.toISODate() === time.toISODate() && 
+    return hoveredSlot !== null &&
+           hoveredSlot.time.toISODate() === time.toISODate() &&
            hoveredSlot.date.toISODate() === date.toISODate();
   }
 
@@ -271,14 +271,14 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
   calculateEventPosition(event: CalendarEvent, slotDuration = 30): { top: number, height: number } {
     const eventTime = event.time || event.date;
     const duration = event.duration || 60; // default 1 hour
-    
+
     const hour = eventTime.hour;
     const minute = eventTime.minute;
     const totalMinutes = hour * 60 + minute;
-    
+
     const top = (totalMinutes / slotDuration) * 2; // 2rem per slot
     const height = (duration / slotDuration) * 2; // 2rem per slot
-    
+
     return { top, height };
   }
 
@@ -287,47 +287,47 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
     const slotDuration = this.config().timeSlotDuration || 30;
     const eventTime = event.time || event.date;
     const duration = event.duration || 60;
-    
+
     // Calculate minutes from slot start
     const slotStartMinutes = slotTime.hour * 60 + slotTime.minute;
     const eventStartMinutes = eventTime.hour * 60 + eventTime.minute;
     const minutesFromSlotStart = eventStartMinutes - slotStartMinutes;
-    
+
     // Convert to rem units (assuming 2rem per 30-minute slot)
     const top = (minutesFromSlotStart / slotDuration) * 2;
     const height = (duration / slotDuration) * 2;
-    
+
     return { top, height };
   }
 
   // Get events with proper stacking for overlapping (improved algorithm)
   getStackedEventsForSlot(events: CalendarEvent[]): {event: CalendarEvent, left: number, width: number}[] {
     if (events.length <= 1) {
-      return events.map(e => ({ 
-        event: e, 
-        stackIndex: 0, 
+      return events.map(e => ({
+        event: e,
+        stackIndex: 0,
         left: 3, // Start after time labels (3rem)
         width: 100 - 3.5 // 100% minus time label space and margins
       }));
     }
-    
+
     const sortedEvents = [...events].sort((a, b) => {
       const timeA = a.time || a.date;
       const timeB = b.time || b.date;
       return timeA.toMillis() - timeB.toMillis();
     });
-    
+
     // Group events by overlapping time ranges
     const stacks: CalendarEvent[][] = [];
-    
+
     for (const event of sortedEvents) {
       let placed = false;
-      
+
       // Try to place in existing stack
       //for (let i = 0; i < stacks.length; i++) {
       for (const stack of stacks) {
         let canPlaceInStack = true;
-        
+
         // Check if this event overlaps with any event in this stack
         for (const stackEvent of stack) {
           if (this.eventsOverlap(event, stackEvent)) {
@@ -335,24 +335,24 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
             break;
           }
         }
-        
+
         if (canPlaceInStack) {
           stack.push(event);
           placed = true;
           break;
         }
       }
-      
+
       // If couldn't place in existing stack, create new one
       if (!placed) {
         stacks.push([event]);
       }
     }
-    
+
     const result: {event: CalendarEvent, stackIndex: number, left: number, width: number}[] = [];
     const availableWidth = 100 - 3.5; // Total width minus time label space and margins
     const stackWidth = availableWidth / stacks.length; // Available width divided by number of stacks
-    
+
     for (let stackIndex = 0; stackIndex < stacks.length; stackIndex++) {
       for (const event of stacks[stackIndex]) {
         result.push({
@@ -363,7 +363,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
         });
       }
     }
-    
+
     return result;
   }
 
@@ -372,12 +372,12 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
     const time2 = event2.time || event2.date;
     const duration1 = event1.duration || 60;
     const duration2 = event2.duration || 60;
-    
+
     const start1 = time1.toMillis();
     const end1 = start1 + (duration1 * 60 * 1000);
     const start2 = time2.toMillis();
     const end2 = start2 + (duration2 * 60 * 1000);
-    
+
     // Events overlap if one starts before the other ends
     return start1 < end2 && start2 < end1;
   }
@@ -385,25 +385,25 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
   // Get overlapping events for better positioning
   getOverlappingEvents(events: CalendarEvent[]): CalendarEvent[][] {
     if (events.length <= 1) return [events];
-    
+
     const sortedEvents = [...events].sort((a, b) => {
       const timeA = a.time || a.date;
       const timeB = b.time || b.date;
       return timeA.toMillis() - timeB.toMillis();
     });
-    
+
     const groups: CalendarEvent[][] = [];
     let currentGroup: CalendarEvent[] = [sortedEvents[0]];
-    
+
     for (let i = 1; i < sortedEvents.length; i++) {
       const currentEvent = sortedEvents[i];
       const lastEventInGroup = currentGroup[currentGroup.length - 1];
-      
+
       const currentStart = (currentEvent.time || currentEvent.date).toMillis();
-      const lastEnd = (lastEventInGroup.time || lastEventInGroup.date).plus({ 
-        minutes: lastEventInGroup.duration || 60 
+      const lastEnd = (lastEventInGroup.time || lastEventInGroup.date).plus({
+        minutes: lastEventInGroup.duration || 60
       }).toMillis();
-      
+
       if (currentStart < lastEnd) {
         // Events overlap, add to current group
         currentGroup.push(currentEvent);
@@ -413,7 +413,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
         currentGroup = [currentEvent];
       }
     }
-    
+
     groups.push(currentGroup);
     return groups;
   }
@@ -421,11 +421,11 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {
     // Initialize mobile detection
     this.detectMobile();
-    
+
     // Listen for window resize to update mobile detection
     this.resizeListener = () => this.detectMobile();
     window.addEventListener('resize', this.resizeListener);
-    
+
     // Initialize with config
     const config = this.config();
     if (config.defaultViewType) {
@@ -452,7 +452,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnDestroy(): void {
     this.isDestroyed.set(true);
     this.colorGenerator.reset();
-    
+
     // Clean up resize listener
     if (this.resizeListener) {
       window.removeEventListener('resize', this.resizeListener);
@@ -468,7 +468,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
     hammer.on('panstart', (event: HammerInput) => {
       const target = event.target as HTMLElement;
       const eventCard = target.closest('.ncv-event-card, .ncv-all-day-event-card');
-      
+
       if (eventCard) {
         const eventId = eventCard.getAttribute('data-event-id');
         if (eventId) {
@@ -490,7 +490,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
           x: event.center.x,
           y: event.center.y
         });
-        
+
         // Check for drop targets
         const elementUnderPointer = document.elementFromPoint(event.center.x, event.center.y);
         if (elementUnderPointer) {
@@ -523,14 +523,14 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
       const timeSlotElement = timeSlot as HTMLElement;
       const timeValue = timeSlotElement.getAttribute('data-time');
       const dateValue = timeSlotElement.getAttribute('data-date');
-      
+
       if (timeValue && dateValue) {
         const time = DateTime.fromISO(timeValue);
         const date = DateTime.fromISO(dateValue);
-        
+
         // Set the hovered time slot (green highlighting for specific slot being hovered)
         this.dragDropService.setHoveredTimeSlot({ time, date });
-        
+
         // Set the drop target (blue highlighting for valid drop zones)
         this.dragDropService.setDropTarget({ date, time });
         return;
@@ -542,7 +542,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
     if (dayCell) {
       const dayElement = dayCell as HTMLElement;
       const dateValue = dayElement.getAttribute('data-date');
-      
+
       if (dateValue) {
         const date = DateTime.fromISO(dateValue);
         // Set drop target for all-day events
@@ -563,10 +563,10 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
     if (state.isDragging && state.draggedEvent && state.dropTarget) {
       const draggedEvent = state.draggedEvent;
       const dropTarget = state.dropTarget;
-      
+
       // Determine the new time based on the drop target and current view
       let newTime: DateTime | undefined;
-      
+
       if (dropTarget.time) {
         // Dropped on a time slot - use the slot's time
         newTime = dropTarget.time;
@@ -577,7 +577,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
         // All-day event - no time needed
         newTime = undefined;
       }
-      
+
       this.moveEvent.emit({
         event: draggedEvent,
         newDate: dropTarget.date,
@@ -607,18 +607,18 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // Drag and drop handlers
   onEventDragStart(event: CalendarEvent, mouseEvent: MouseEvent): void {
-    this.dragDropService.startDrag(event, { 
-      x: mouseEvent.clientX, 
-      y: mouseEvent.clientY 
+    this.dragDropService.startDrag(event, {
+      x: mouseEvent.clientX,
+      y: mouseEvent.clientY
     }, mouseEvent.target as HTMLElement);
   }
 
   onEventDragMove(mouseEvent: MouseEvent): void {
     const state = this.dragState();
     if (state.isDragging) {
-      this.dragDropService.updateDragPosition({ 
-        x: mouseEvent.clientX, 
-        y: mouseEvent.clientY 
+      this.dragDropService.updateDragPosition({
+        x: mouseEvent.clientX,
+        y: mouseEvent.clientY
       });
     }
   }
