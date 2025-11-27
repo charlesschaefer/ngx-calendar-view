@@ -36,12 +36,12 @@
   },
   "homepage": "https://github.com/charlesschaefer/ngx-calendar-view#readme",
   "peerDependencies": {
-    "@angular/common": "^19.0.0",
+    "@angular/common": "^19.2.16",
     "@angular/core": "^19.0.0",
     "luxon": "^3.0.0"
   },
   "dependencies": {
-    "@angular/common": "^19.0.0",
+    "@angular/common": "^19.2.16",
     "@angular/compiler": "^19.0.0",
     "@angular/core": "^19.0.0",
     "@angular/forms": "^19.0.0",
